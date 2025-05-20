@@ -20,8 +20,6 @@ namespace LibraLoan.Features.Authors.Editor
 
         protected override async Task Save()
         {
-            bool isConfirmed = _messenger.Send(new Core.Messages.Common.ConfigrRequestMessge());
-            if (!isConfirmed) return;
             AuthorDto authorDto = new AuthorDto(0, Name, _appStateService.CurrentUser);
             Author author = await _mediator.Send(new Core.Commands.Common.CreateCommand<Author, AuthorDto>(authorDto));
             if (author is not null)

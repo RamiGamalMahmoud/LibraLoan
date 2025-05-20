@@ -18,8 +18,6 @@ namespace LibraLoan.Features.Publishers.Editor
 
         protected override async Task Save()
         {
-            bool isConfirmed = _messenger.Send(new Core.Messages.Common.ConfigrRequestMessge());
-            if (!isConfirmed) return;
             PublisherDto publisherDto = new PublisherDto(0, Name, Phone, Email, Website, Fax, _appStateService.CurrentUser);
 
             Publisher publisher = await _mediator.Send(new Core.Commands.Common.CreateCommand<Publisher, PublisherDto>(publisherDto));

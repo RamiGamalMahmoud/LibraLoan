@@ -28,13 +28,10 @@ namespace LibraLoan.Features.Management.Users.Editor
 
         protected override async Task Save()
         {
-            bool isConfirmed = _messenger.Send(new Core.Messages.Common.ConfigrRequestMessge("هل تريد حفظ التعديلات ؟"));
-
-            if (!isConfirmed) return;
             User currentUser = _messenger.Send(new Core.Messages.GetLoggedInUser());
             User user = await _mediator.Send(new Core.Commands.Common.CreateCommand<User, UserDto>(new UserDto(0, UserName, _passwordHasher.HashPassword(Password), SelectedRole, currentUser, true)));
 
-            if(user is not null)
+            if (user is not null)
             {
                 _messenger.Send(new Core.Messages.Common.SuccessMessage("تم الاضافة بنجاح"));
                 return;

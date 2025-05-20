@@ -16,8 +16,6 @@ namespace LibraLoan.Features.Management.RolesAndPermissions.Roles.Editor
 
         protected override async Task Save()
         {
-            bool isConfirmed = _messenger.Send(new Core.Messages.Common.ConfigrRequestMessge("هل تريد حفظ التعديلات ؟"));
-            if (!isConfirmed) return;
             IEnumerable<Permission> selectedPermissions = Permissions.Where(x => x.IsSelected).Select(x => x.Value);
             RoleDto roleDto = new RoleDto(0, Name, selectedPermissions);
             await _mediator.Send(new Core.Commands.Common.CreateCommand<Role, RoleDto>(roleDto));

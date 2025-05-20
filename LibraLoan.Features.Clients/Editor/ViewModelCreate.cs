@@ -21,7 +21,6 @@ namespace LibraLoan.Features.Clients.Editor
 
         protected override async Task Save()
         {
-            bool isConfirmed = _messenger.Send(new Core.Messages.Common.ConfigrRequestMessge("هل تريد حفظ التعديلات ؟"));
             ClientDto clientDto = new ClientDto(0, Name, Email, Phone, _appStateService.CurrentUser);
             Client client = await _mediator.Send(new CreateCommand<Client, ClientDto>(clientDto));
             if (client is null)

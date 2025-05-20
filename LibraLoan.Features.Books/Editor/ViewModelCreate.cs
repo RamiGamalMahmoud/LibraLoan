@@ -18,8 +18,6 @@ namespace LibraLoan.Features.Books.Editor
 
         protected async override Task Save()
         {
-            bool isConfirmed = _messenger.Send(new Core.Messages.Common.ConfigrRequestMessge("هل تريد حفظ التعديلات ؟"));
-            if (!isConfirmed) return;
             BookDto bookDto = new BookDto(0, BookTitle, ISBN, SelectedPublisher, (int)Version , Photo, (System.DateTime)PublishDate, (int)Copies, _appStateService.CurrentUser, SelectedAuthors);
             Book book = await _mediator.Send(new Core.Commands.Common.CreateCommand<Book, BookDto>(bookDto));
 
