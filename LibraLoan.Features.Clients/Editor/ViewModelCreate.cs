@@ -26,11 +26,10 @@ namespace LibraLoan.Features.Clients.Editor
             if (client is null)
             {
                 _messenger.Send(new Core.Messages.Common.ErrorMessage("لم يتم الاضافة"));
+                return;
             }
-            else
-            {
-                _messenger.Send(new Core.Messages.Common.ConfigrRequestMessge("تم حفظ التعديلات بنجاح"));
-            }
+            _messenger.Send(new Core.Messages.Common.SuccessMessage("تمت الإضافة بنجاح"));
+            ClearInputs();
         }
     }
 }

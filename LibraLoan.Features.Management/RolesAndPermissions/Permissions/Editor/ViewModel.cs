@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using LibraLoan.Core.Common;
 using LibraLoan.Core.Models;
@@ -25,8 +26,13 @@ namespace LibraLoan.Features.Management.RolesAndPermissions.Permissions.Editor
             Resources = await _mediator.Send(new Core.Commands.Common.GetAllCommand<Resource>(true));
         }
 
-        [ObservableProperty]
-        private bool _isDone;
+        [RelayCommand]
+        protected void ClearInputs()
+        {
+            SelectedResource = null;
+            SelectedAction = null;
+            HasChanges = false;
+        }
 
         [ObservableProperty]
         [Required(ErrorMessage = "يرجى اختيار نوع الصلاحية")]

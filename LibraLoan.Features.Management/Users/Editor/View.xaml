@@ -89,7 +89,6 @@
                 <Button
                     Width="100"
                     BorderThickness="0"
-                    Click="Button_Click"
                     Command="{Binding SaveCommand}"
                     Content="حفظ"
                     Cursor="Hand"
@@ -108,8 +107,7 @@
                     Cursor="Hand"
                     FontFamily="Arial"
                     FontSize="18"
-                    FontWeight="Bold"
-                    IsDefault="True" />
+                    FontWeight="Bold" />
             </StackPanel>
 
         </Grid>

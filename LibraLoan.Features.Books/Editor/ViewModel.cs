@@ -77,7 +77,7 @@ namespace LibraLoan.Features.Books.Editor
         private IEnumerable<Publisher> _publishers;
 
         [ObservableProperty]
-        private IEnumerable<SelectableObject<Author>> _authors = new List<SelectableObject<Author>>();
+        private List<SelectableObject<Author>> _authors = new List<SelectableObject<Author>>();
 
         [RelayCommand]
         private void SelectBookImage()
@@ -105,6 +105,26 @@ namespace LibraLoan.Features.Books.Editor
         {
             HasChanges = true;
             SaveCommand.NotifyCanExecuteChanged();
+        }
+
+        [RelayCommand]
+        protected void ClearInputs()
+        {
+            BookTitle = null;
+            ISBN = null;
+            PublishDate = null;
+            Version = null;
+            Copies = null;
+            Photo = null;
+            SelectedPublisher = null;
+
+            foreach (SelectableObject<Author> selectableAutnor in Authors)
+            {
+                selectableAutnor.IsSelected = false;
+            }
+
+
+            HasChanges = false;
         }
 
         public override bool CanSave => base.CanSave && HasAuthors;

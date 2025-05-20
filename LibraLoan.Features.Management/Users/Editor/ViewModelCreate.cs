@@ -31,13 +31,20 @@ namespace LibraLoan.Features.Management.Users.Editor
             User currentUser = _messenger.Send(new Core.Messages.GetLoggedInUser());
             User user = await _mediator.Send(new Core.Commands.Common.CreateCommand<User, UserDto>(new UserDto(0, UserName, _passwordHasher.HashPassword(Password), SelectedRole, currentUser, true)));
 
-            if (user is not null)
+            if (user is null)
             {
-                _messenger.Send(new Core.Messages.Common.SuccessMessage("تم الاضافة بنجاح"));
+                _messenger.Send(new Core.Messages.Common.ErrorMessage("فشل الاضافة"));
                 return;
             }
+            _messenger.Send(new Core.Messages.Common.SuccessMessage("تم الاضافة بنجاح"));
+            ClearInputs();
 
-            _messenger.Send(new Core.Messages.Common.ErrorMessage("فشل الاضافة"));
+        }
+
+        protected override void ClearInputs()
+        {
+            Password = null;
+            base.ClearInputs();
         }
     }
 }

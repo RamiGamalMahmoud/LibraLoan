@@ -18,7 +18,15 @@ namespace LibraLoan.Features.Management.RolesAndPermissions.Roles.Editor
         {
             IEnumerable<Permission> selectedPermissions = Permissions.Where(x => x.IsSelected).Select(x => x.Value);
             RoleDto roleDto = new RoleDto(0, Name, selectedPermissions);
-            await _mediator.Send(new Core.Commands.Common.CreateCommand<Role, RoleDto>(roleDto));
+            Role role = await _mediator.Send(new Core.Commands.Common.CreateCommand<Role, RoleDto>(roleDto));
+            if(role is null)
+            {
+                _messenger.Send(new Core.Messages.Common.ErrorMessage("خطاء في الحفظ"));
+                return;
+            }
+
+            _messenger.Send(new Core.Messages.Common.SuccessMessage("تم الحفظ بنجاح"));
+            ClearInputs();
         }
 
         public override string Title => "إضافة دور";

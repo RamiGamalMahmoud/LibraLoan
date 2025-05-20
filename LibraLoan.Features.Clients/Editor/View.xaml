@@ -107,8 +107,7 @@
                     Cursor="Hand"
                     FontFamily="Arial"
                     FontSize="18"
-                    FontWeight="Bold"
-                    IsDefault="True" />
+                    FontWeight="Bold" />
             </StackPanel>
 
         </Grid>

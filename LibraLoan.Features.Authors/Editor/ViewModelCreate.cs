@@ -26,6 +26,7 @@ namespace LibraLoan.Features.Authors.Editor
             {
                 _messenger.Send(new Core.Messages.Common.SuccessMessage("تم الحفظ بنجاح"));
                 author.CreatedBy = _appStateService.CurrentUser;
+                Name = string.Empty;
                 return;
             }
             _messenger.Send(new Core.Messages.Common.ErrorMessage("حدث خطأ في الحفظ"));

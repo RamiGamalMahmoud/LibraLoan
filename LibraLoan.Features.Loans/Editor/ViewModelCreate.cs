@@ -23,15 +23,15 @@ namespace LibraLoan.Features.Loans.Editor
         {
             LoanDto loanDto = new LoanDto(0, SelectedBook, SelectedClient, DateTime.Now, (DateTime)ExpectedReturnDate, ActualReturnDate, _appStateService.CurrentUser);
             Loan loan = await _mediator.Send(new CreateCommand<Loan, LoanDto>(loanDto));
-            if (loan is not null)
-            {
-                _messenger.Send(new Core.Messages.Common.SuccessMessage("تم الحفظ بنجاح"));
-                HasChanges = false;
-            }
-            else
+            if (loan is null)
             {
                 _messenger.Send(new Core.Messages.Common.ErrorMessage("حدث خطأ في الحفظ"));
+                return;
             }
+
+            _messenger.Send(new Core.Messages.Common.SuccessMessage("تم الحفظ بنجاح"));
+            ClearInputs();
+            HasChanges = false;
         }
 
         private readonly IAppStateService _appStateService;

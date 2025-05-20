@@ -130,12 +130,12 @@
                     Grid.Row="2"
                     Grid.Column="2"
                     Margin="0,20,0,0"
-                    Visibility="{Binding HasErrors, Converter={x:Static mdc:BooleanToVisibilityConverter.CollapsedInstance}}"
                     Padding="10"
                     Background="WhiteSmoke"
                     FontSize="12"
                     Foreground="Red"
-                    Text="{Binding Errors}" />
+                    Text="{Binding Errors}"
+                    Visibility="{Binding HasErrors, Converter={x:Static mdc:BooleanToVisibilityConverter.CollapsedInstance}}" />
 
             </Grid>
 
@@ -164,8 +164,7 @@
                     Cursor="Hand"
                     FontFamily="Arial"
                     FontSize="18"
-                    FontWeight="Bold"
-                    IsDefault="True" />
+                    FontWeight="Bold" />
             </StackPanel>
 
         </Grid>

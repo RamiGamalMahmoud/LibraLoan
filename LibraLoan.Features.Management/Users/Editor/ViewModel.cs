@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using LibraLoan.Core.Abstraction;
 using LibraLoan.Core.Common;
@@ -52,7 +53,14 @@ namespace LibraLoan.Features.Management.Users.Editor
         [NotifyCanExecuteChangedFor(nameof(SaveCommand))]
         private Role _selectedRole;
 
-
+        [RelayCommand]
+        protected virtual void ClearInputs()
+        {
+            UserName = null;
+            SelectedRole = null;
+            IsActive = true;
+            HasChanges = false;
+        }
 
         protected IMediator _mediator;
         protected IMessenger _messenger;

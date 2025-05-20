@@ -92,8 +92,7 @@
                     Content="إلغاء"
                     Cursor="Hand"
                     FontFamily="Arial"
-                    FontSize="20"
-                    IsDefault="True" />
+                    FontSize="20" />
 
             </Grid>
 

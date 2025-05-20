@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using LibraLoan.Core.Common;
 using MediatR;
@@ -34,6 +35,15 @@ namespace LibraLoan.Features.Clients.Editor
         [NotifyDataErrorInfo]
         [NotifyCanExecuteChangedFor(nameof(SaveCommand))]
         private string _email;
+
+        [RelayCommand]
+        protected void ClearInputs()
+        {
+            Name = null;
+            Phone = null;
+            Email = null;
+            HasChanges = false;
+        }
 
         protected IMediator _mediator;
         protected IMessenger _messenger;

@@ -129,7 +129,6 @@
 
                 <Button
                     BorderThickness="0"
-                    Click="Button_Click"
                     Command="{Binding SaveCommand}"
                     Content="حفظ"
                     Cursor="Hand"
@@ -146,8 +145,7 @@
                     Content="إلغاء"
                     Cursor="Hand"
                     FontFamily="Arial"
-                    FontSize="20"
-                    IsDefault="True" />
+                    FontSize="20" />
 
             </StackPanel>
 

@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using LibraLoan.Core.Common;
 using LibraLoan.Core.Models;
@@ -109,6 +110,15 @@ namespace LibraLoan.Features.Loans.Editor
         [NotifyPropertyChangedFor(nameof(Errors))]
         [NotifyCanExecuteChangedFor(nameof(SaveCommand))]
         private DateTime? _actualReturnDate;
+
+        [RelayCommand]
+        protected void ClearInputs()
+        {
+            SelectedBook = null;
+            SelectedClient = null;
+            ExpectedReturnDate = null;
+            LoanDate = null;
+        }
 
         protected readonly IMediator _mediator;
         protected readonly IMessenger _messenger;

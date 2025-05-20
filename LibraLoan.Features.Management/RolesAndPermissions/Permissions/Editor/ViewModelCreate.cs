@@ -18,13 +18,13 @@ namespace LibraLoan.Features.Management.RolesAndPermissions.Permissions.Editor
         {
             PermissionDto permissionDto = new PermissionDto(0, SelectedResource, SelectedAction);
             Permission permission = await _mediator.Send(new Core.Commands.Common.CreateCommand<Permission, PermissionDto>(permissionDto));
-            if (permission is not null)
+            if (permission is null)
             {
-                _messenger.Send(new Core.Messages.Common.SuccessMessage("تم اضافة الصلاحية بنجاح"));
-                IsDone = true;
+                _messenger.Send(new Core.Messages.Common.ErrorMessage("صلاحية مكررة"));
                 return;
             }
-            _messenger.Send(new Core.Messages.Common.ErrorMessage(""));
+            _messenger.Send(new Core.Messages.Common.SuccessMessage("تم اضافة الصلاحية بنجاح"));
+            ClearInputs();
         }
     }
 }

@@ -12,17 +12,7 @@ namespace LibraLoan.Features.Management.RolesAndPermissions.Permissions.Editor
 
             DataContext = viewModel;
 
-            viewModel.PropertyChanged += ViewModel_PropertyChanged;
-
             Loaded += View_Loaded;
-        }
-
-        private void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(ViewModel.IsDone))
-            {
-                this.Close();
-            }
         }
 
         private async void View_Loaded(object sender, RoutedEventArgs e)

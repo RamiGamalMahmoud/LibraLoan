@@ -39,6 +39,17 @@ namespace LibraLoan.Features.Management.RolesAndPermissions.Roles.Editor
             SaveCommand.NotifyCanExecuteChanged();
         }
 
+        [RelayCommand]
+        protected void ClearInputs()
+        {
+            Name = null;
+            foreach(SelectableObject<Permission> permission in Permissions)
+            {
+                permission.IsSelected = false;
+            }
+            HasChanges = false;
+        }
+
         public override bool CanSave => base.CanSave && SelectedPermissions.Any();
 
         [ObservableProperty]

@@ -21,15 +21,13 @@ namespace LibraLoan.Features.Publishers.Editor
             PublisherDto publisherDto = new PublisherDto(0, Name, Phone, Email, Website, Fax, _appStateService.CurrentUser);
 
             Publisher publisher = await _mediator.Send(new Core.Commands.Common.CreateCommand<Publisher, PublisherDto>(publisherDto));
-            if (publisher is not null)
-            {
-                _messenger.Send(new Core.Messages.Common.SuccessMessage("تم الحفظ بنجاح"));
-                HasChanges = false;
-            }
-            else
+            if (publisher is null)
             {
                 _messenger.Send(new Core.Messages.Common.ErrorMessage("حدث خطأ في الحفظ"));
             }
+            _messenger.Send(new Core.Messages.Common.SuccessMessage("تم الحفظ بنجاح"));
+            ClearInputs();
+            HasChanges = false;
         }
 
         private readonly IAppStateService _appStateService;

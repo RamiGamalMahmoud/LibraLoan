@@ -24,6 +24,17 @@ namespace LibraLoan.Features.Publishers.Editor
             return Task.CompletedTask;
         }
 
+        [RelayCommand]
+        protected virtual void ClearInputs()
+        {
+            Name = null;
+            Phone = null;
+            Fax = null;
+            Email = null;
+            Website = null;
+            HasChanges = false;
+        }
+
         [ObservableProperty]
         [Required(ErrorMessage = "يجب ادخال اسم دار النشر")]
         [NotifyDataErrorInfo]
