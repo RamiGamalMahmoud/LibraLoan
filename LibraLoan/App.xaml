@@ -1,0 +1,33 @@
+﻿<Application
+    x:Class="LibraLoan.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:LibraLoan"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    ShutdownMode="OnMainWindowClose">
+    <Application.Resources>
+        <ResourceDictionary>
+
+            <FontFamily x:Key="FontFamily">Arial</FontFamily>
+            <sys:Double x:Key="FontSize">14</sys:Double>
+            <sys:Boolean x:Key="True">True</sys:Boolean>
+            <sys:Boolean x:Key="False">False</sys:Boolean>
+
+            <ResourceDictionary.MergedDictionaries>
+
+                <materialDesign:BundledTheme
+                    BaseTheme="Light"
+                    PrimaryColor="DeepPurple"
+                    SecondaryColor="LightBlue" />
+
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign2.Defaults.xaml" />
+
+                <ResourceDictionary Source="/LibraLoan.Resources;component/Colors.xaml" />
+                <ResourceDictionary Source="/LibraLoan.Resources;component/Styles/DataGridColumnHeader.xaml" />
+                <ResourceDictionary Source="/LibraLoan.Resources;component/Styles/DataGridStyle.xaml" />
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

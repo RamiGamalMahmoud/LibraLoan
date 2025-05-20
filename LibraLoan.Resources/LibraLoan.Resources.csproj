@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<UseWPF>true</UseWPF>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="Images\LibraLoan-64.png" />
+	  <None Remove="Images\LibraLoan.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="MaterialDesignColors" Version="5.2.1" />
+	  <PackageReference Include="MaterialDesignThemes" Version="5.2.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Resource Include="Images\LibraLoan-64.png" />
+	  <Resource Include="Images\LibraLoan.png" />
+	</ItemGroup>
+
+</Project>
