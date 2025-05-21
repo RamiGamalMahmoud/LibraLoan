@@ -51,17 +51,50 @@
 
         <DataGrid
             Grid.Row="1"
+            HorizontalAlignment="Left"
             AutoGenerateColumns="False"
+            Background="White"
             ColumnHeaderStyle="{StaticResource MyDataGridColumnHeader}"
             FontWeight="Bold"
             Foreground="{StaticResource BlackBrush}"
             IsReadOnly="True"
             ItemsSource="{Binding Models, IsAsync=True}">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Name}" Header="الاسم" />
-                <DataGridTextColumn Binding="{Binding DateCreated, StringFormat='yyyy/MM/dd HH:mm'}" Header="تاريخ الإضافة" />
+                <DataGridTextColumn Binding="{Binding Name}">
+                    <DataGridTextColumn.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <md:PackIcon Foreground="{StaticResource BlueBrush}" Kind="TextBox" />
+                            <TextBlock Margin="5,0,0,0" Text="الاسم" />
+                        </StackPanel>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
 
-                <DataGridTemplateColumn MaxWidth="300" Header="الصلاحيات">
+                <DataGridTextColumn Binding="{Binding DateCreated, StringFormat=yyyy-MM-dd hh:mm tt}">
+                    <DataGridTextColumn.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <md:PackIcon Foreground="{StaticResource BlueBrush}" Kind="CalendarAdd" />
+                            <TextBlock Margin="5,0,0,0" Text="تاريخ الإضافة" />
+                        </StackPanel>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Binding="{Binding CreatedBy.Username}">
+                    <DataGridTextColumn.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <md:PackIcon Foreground="{StaticResource BlueBrush}" Kind="UserTie" />
+                            <TextBlock Margin="5,0,0,0" Text="أضيف بواسطة" />
+                        </StackPanel>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+
+                <DataGridTemplateColumn MaxWidth="300">
+
+                    <DataGridTemplateColumn.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <md:PackIcon Foreground="{StaticResource BlueBrush}" Kind="OrderBoolAscending" />
+                            <TextBlock Margin="5,0,0,0" Text="الصلاحيات" />
+                        </StackPanel>
+                    </DataGridTemplateColumn.Header>
 
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -95,6 +128,7 @@
                 </DataGridTemplateColumn>
 
                 <DataGridTemplateColumn>
+
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">

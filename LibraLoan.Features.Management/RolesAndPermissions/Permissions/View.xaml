@@ -50,16 +50,52 @@
 
         <DataGrid
             Grid.Row="1"
+            HorizontalAlignment="Left"
             AutoGenerateColumns="False"
+            Background="White"
             ColumnHeaderStyle="{StaticResource MyDataGridColumnHeader}"
             FontWeight="Bold"
             Foreground="{StaticResource BlackBrush}"
             IsReadOnly="True"
             ItemsSource="{Binding Models, IsAsync=True}">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Resource.Name}" Header="نوع الصلاحية" />
-                <DataGridTextColumn Binding="{Binding Action.Name}" Header="نوع الإجراء" />
-                <DataGridTextColumn Binding="{Binding DateCreated, StringFormat='yyyy/MM/dd HH:mm'}" Header="تاريخ الإضافة" />
+
+                <DataGridTextColumn Binding="{Binding Resource.Name}">
+                    <DataGridTextColumn.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <md:PackIcon Foreground="{StaticResource BlueBrush}" Kind="ResourceDescriptionFramework" />
+                            <TextBlock Margin="5,0,0,0" Text="نوع الصلاحية" />
+                        </StackPanel>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Binding="{Binding Action.Name}">
+                    <DataGridTextColumn.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <md:PackIcon Foreground="{StaticResource BlueBrush}" Kind="InteractionTap" />
+                            <TextBlock Margin="5,0,0,0" Text="نوع الإجراء" />
+                        </StackPanel>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Binding="{Binding DateCreated, StringFormat=yyyy-MM-dd hh:mm tt}">
+                    <DataGridTextColumn.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <md:PackIcon Foreground="{StaticResource BlueBrush}" Kind="CalendarAdd" />
+                            <TextBlock Margin="5,0,0,0" Text="تاريخ الإضافة" />
+                        </StackPanel>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Binding="{Binding CreatedBy.Username}">
+                    <DataGridTextColumn.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <md:PackIcon Foreground="{StaticResource BlueBrush}" Kind="UserTie" />
+                            <TextBlock Margin="5,0,0,0" Text="أضيف بواسطة" />
+                        </StackPanel>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

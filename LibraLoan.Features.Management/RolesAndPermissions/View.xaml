@@ -7,11 +7,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:permissions="clr-namespace:LibraLoan.Features.Management.RolesAndPermissions.Permissions"
     xmlns:roles="clr-namespace:LibraLoan.Features.Management.RolesAndPermissions.Roles"
-    d:Background="White"
     d:DataContext="{d:DesignInstance Type=local:ViewModel}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     x:ClassModifier="internal"
+    Background="{StaticResource WhiteBrush}"
     mc:Ignorable="d">
 
     <Grid>
