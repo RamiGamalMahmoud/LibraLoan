@@ -20,7 +20,7 @@ namespace LibraLoan.Features.Management.RolesAndPermissions.Permissions.Editor
             Permission permission = await _mediator.Send(new Core.Commands.Common.CreateCommand<Permission, PermissionDto>(permissionDto));
             if (permission is null)
             {
-                _messenger.Send(new Core.Messages.Common.ErrorMessage("صلاحية مكررة"));
+                _messenger.Send(new Core.Messages.Common.ErrorMessage("هذه الصلاحية موجودة بالفعل"));
                 return;
             }
             _messenger.Send(new Core.Messages.Common.SuccessMessage("تم اضافة الصلاحية بنجاح"));

@@ -21,7 +21,7 @@ namespace LibraLoan.Features.Management.RolesAndPermissions.Roles.Editor
             Role role = await _mediator.Send(new Core.Commands.Common.CreateCommand<Role, RoleDto>(roleDto));
             if(role is null)
             {
-                _messenger.Send(new Core.Messages.Common.ErrorMessage("خطاء في الحفظ"));
+                _messenger.Send(new Core.Messages.Common.ErrorMessage("هذا الدور موجود مسبقا"));
                 return;
             }
 

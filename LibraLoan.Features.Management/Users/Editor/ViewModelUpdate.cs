@@ -48,7 +48,7 @@ namespace LibraLoan.Features.Management.Users.Editor
                 return;
             }
 
-            _messenger.Send(new Core.Messages.Common.ErrorMessage("فشل التحديث"));
+            _messenger.Send(new Core.Messages.Common.ErrorMessage("اسم مستخدم موجود مسبقا"));
         }
     }
 }

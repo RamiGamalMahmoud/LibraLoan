@@ -34,7 +34,7 @@ namespace LibraLoan.Features.Management.RolesAndPermissions.Permissions.Editor
                 _messenger.Send(new Core.Messages.Common.SuccessMessage("تم تعديل الصلاحية بنجاح"));
                 return;
             }
-            _messenger.Send(new Core.Messages.Common.ErrorMessage("فشل تعديل الصلاحية"));
+            _messenger.Send(new Core.Messages.Common.ErrorMessage("هذه الصلاحية موجودة بالفعل"));
         }
     }
 }

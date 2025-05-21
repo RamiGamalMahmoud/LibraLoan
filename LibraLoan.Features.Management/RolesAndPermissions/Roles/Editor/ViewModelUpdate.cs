@@ -63,7 +63,7 @@ namespace LibraLoan.Features.Management.RolesAndPermissions.Roles.Editor
                 return;
             }
 
-            _messenger.Send(new Core.Messages.Common.ErrorMessage("خطأ في التعديل"));
+            _messenger.Send(new Core.Messages.Common.ErrorMessage("هذا الدور موجود مسبقا"));
         }
     }
 }

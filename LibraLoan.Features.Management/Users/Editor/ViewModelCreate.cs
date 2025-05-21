@@ -33,7 +33,7 @@ namespace LibraLoan.Features.Management.Users.Editor
 
             if (user is null)
             {
-                _messenger.Send(new Core.Messages.Common.ErrorMessage("فشل الاضافة"));
+                _messenger.Send(new Core.Messages.Common.ErrorMessage("اسم مستخدم موجود مسبقا"));
                 return;
             }
             _messenger.Send(new Core.Messages.Common.SuccessMessage("تم الاضافة بنجاح"));
