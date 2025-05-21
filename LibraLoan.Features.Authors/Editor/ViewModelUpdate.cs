@@ -23,7 +23,7 @@ namespace LibraLoan.Features.Authors.Editor
         {
             bool isConfirmed = _messenger.Send(new Core.Messages.Common.ConfigrRequestMessge());
             if (!isConfirmed) return;
-            AuthorDto authorDto = new AuthorDto(_author.Id, Name, null);
+            AuthorDto authorDto = new AuthorDto(_author.Id, Name.Trim(), null);
             bool isUpdated = await _mediator.Send(new Core.Commands.Common.UpdateCommand<AuthorDto>(authorDto));
 
             if (isUpdated)

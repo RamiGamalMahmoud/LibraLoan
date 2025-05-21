@@ -46,7 +46,7 @@ namespace LibraLoan.Features.Management.RolesAndPermissions.Roles.Editor
             bool isConfirmed = _messenger.Send(new Core.Messages.Common.ConfigrRequestMessge("هل تريد حفظ التعديلات ؟"));
             if (!isConfirmed) return;
 
-            RoleDto roleDto = new RoleDto(_role.Id, Name, SelectedPermissions);
+            RoleDto roleDto = new RoleDto(_role.Id, Name.Trim(), SelectedPermissions);
             bool isUpdated = await _mediator.Send(new Core.Commands.Common.UpdateCommand<RoleDto>(roleDto));
 
             if (isUpdated)

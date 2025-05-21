@@ -18,7 +18,7 @@ namespace LibraLoan.Features.Publishers.Editor
 
         protected override async Task Save()
         {
-            PublisherDto publisherDto = new PublisherDto(0, Name, Phone, Email, Website, Fax, _appStateService.CurrentUser);
+            PublisherDto publisherDto = new PublisherDto(0, Name.Trim(), Phone.Trim(), Email.Trim(), Website.Trim(), Fax.Trim(), _appStateService.CurrentUser);
 
             Publisher publisher = await _mediator.Send(new Core.Commands.Common.CreateCommand<Publisher, PublisherDto>(publisherDto));
             if (publisher is null)

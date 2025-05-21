@@ -18,15 +18,15 @@ namespace LibraLoan.Features.Books.Editor
 
         protected async override Task Save()
         {
-            //BookDto bookDto = new BookDto(0, BookTitle, ISBN, SelectedPublisher, (int)Version, Photo, (System.DateTime)PublishDate, (int)Copies, _appStateService.CurrentUser, SelectedAuthors);
-            //Book book = await _mediator.Send(new Core.Commands.Common.CreateCommand<Book, BookDto>(bookDto));
+            BookDto bookDto = new BookDto(0, BookTitle.Trim(), ISBN.Trim(), SelectedPublisher, (int)Version, Photo, (System.DateTime)PublishDate, (int)Copies, _appStateService.CurrentUser, SelectedAuthors);
+            Book book = await _mediator.Send(new Core.Commands.Common.CreateCommand<Book, BookDto>(bookDto));
 
-            //if (book is null)
-            //{
-            //    _messenger.Send(new Core.Messages.Common.ErrorMessage("لم يتم الاضافة"));
-            //    return;
-            //}
-            //_messenger.Send(new Core.Messages.Common.SuccessMessage("تم الاضافة بنجاح"));
+            if (book is null)
+            {
+                _messenger.Send(new Core.Messages.Common.ErrorMessage("لم يتم الاضافة"));
+                return;
+            }
+            _messenger.Send(new Core.Messages.Common.SuccessMessage("تم الاضافة بنجاح"));
 
             ClearInputs();
         }

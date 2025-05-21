@@ -23,7 +23,7 @@ namespace LibraLoan.Features.Clients.Editor
         {
             bool isConfirmed = _messenger.Send(new Core.Messages.Common.ConfigrRequestMessge("هل تريد حفظ التعديلات ؟"));
             if (!isConfirmed) return;
-            ClientDto clientDto = new ClientDto(_model.Id, Name, Email, Phone, null);
+            ClientDto clientDto = new ClientDto(_model.Id, Name.Trim(), Email.Trim(), Phone.Trim(), null);
             bool isUpdated = await _mediator.Send(new Core.Commands.Common.UpdateCommand<ClientDto>(clientDto));
 
             if(isUpdated)

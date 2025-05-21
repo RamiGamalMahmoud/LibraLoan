@@ -38,7 +38,7 @@ namespace LibraLoan.Features.Management.Users.Editor
                 hashedPassword = _passwordHasher.HashPassword(Password);
             }
 
-            bool isUpdated = await _mediator.Send(new Core.Commands.Common.UpdateCommand<UserDto>(new UserDto(_user.Id, UserName, hashedPassword, SelectedRole, null, IsActive)));
+            bool isUpdated = await _mediator.Send(new Core.Commands.Common.UpdateCommand<UserDto>(new UserDto(_user.Id, UserName.Trim(), hashedPassword, SelectedRole, null, IsActive)));
             if (isUpdated)
             {
                 _user.Username = UserName;

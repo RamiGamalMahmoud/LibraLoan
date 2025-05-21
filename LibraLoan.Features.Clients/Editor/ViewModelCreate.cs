@@ -21,7 +21,7 @@ namespace LibraLoan.Features.Clients.Editor
 
         protected override async Task Save()
         {
-            ClientDto clientDto = new ClientDto(0, Name, Email, Phone, _appStateService.CurrentUser);
+            ClientDto clientDto = new ClientDto(0, Name.Trim(), Email.Trim(), Phone.Trim(), _appStateService.CurrentUser);
             Client client = await _mediator.Send(new CreateCommand<Client, ClientDto>(clientDto));
             if (client is null)
             {

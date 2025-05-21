@@ -48,7 +48,7 @@ namespace LibraLoan.Features.Books.Editor
         {
             bool isConfirmed = _messenger.Send(new Core.Messages.Common.ConfigrRequestMessge("هل تريد حفظ التعديلات ؟"));
             if (!isConfirmed) return;
-            BookDto bookDto = new BookDto(_book.Id, BookTitle, ISBN, SelectedPublisher, (int)Version, Photo, (System.DateTime)PublishDate, (int)Copies, null, SelectedAuthors);
+            BookDto bookDto = new BookDto(_book.Id, BookTitle.Trim(), ISBN.Trim(), SelectedPublisher, (int)Version, Photo, (System.DateTime)PublishDate, (int)Copies, null, SelectedAuthors);
 
             bool isUpdated = await _mediator.Send(new UpdateCommand<BookDto>(bookDto));
 

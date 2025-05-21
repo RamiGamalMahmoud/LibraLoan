@@ -17,7 +17,7 @@ namespace LibraLoan.Features.Management.RolesAndPermissions.Roles.Editor
         protected override async Task Save()
         {
             IEnumerable<Permission> selectedPermissions = Permissions.Where(x => x.IsSelected).Select(x => x.Value);
-            RoleDto roleDto = new RoleDto(0, Name, selectedPermissions);
+            RoleDto roleDto = new RoleDto(0, Name.Trim(), selectedPermissions);
             Role role = await _mediator.Send(new Core.Commands.Common.CreateCommand<Role, RoleDto>(roleDto));
             if(role is null)
             {
