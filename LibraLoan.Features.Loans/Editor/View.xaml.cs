@@ -18,5 +18,7 @@ namespace LibraLoan.Features.Loans.Editor
                 await Dispatcher.Invoke(() => viewModel.LoadAsync());
             }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e) => Close();
     }
 }

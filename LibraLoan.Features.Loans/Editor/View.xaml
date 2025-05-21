@@ -160,6 +160,7 @@
                     Margin="10,0,0,0"
                     Background="{StaticResource DangerBrush}"
                     BorderThickness="0"
+                    Click="Button_Click"
                     Content="إلغاء"
                     Cursor="Hand"
                     FontFamily="Arial"
