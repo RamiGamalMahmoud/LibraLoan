@@ -59,7 +59,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Resource.Name}" Header="نوع الصلاحية" />
                 <DataGridTextColumn Binding="{Binding Action.Name}" Header="نوع الإجراء" />
-                <DataGridTextColumn Binding="{Binding DateCreated, StringFormat='yyyy/MM/dd HH:mm'}" Header="تاريخ الانشاء" />
+                <DataGridTextColumn Binding="{Binding DateCreated, StringFormat='yyyy/MM/dd HH:mm'}" Header="تاريخ الإضافة" />
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

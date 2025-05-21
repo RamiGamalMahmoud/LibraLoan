@@ -74,7 +74,7 @@
 
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Name}" Header="اسم المؤلف" />
-                <DataGridTextColumn Binding="{Binding DateCreated}" Header="تاريخ الإنشاء" />
+                <DataGridTextColumn Binding="{Binding DateCreated}" Header="تاريخ الإضافة" />
                 <DataGridTextColumn Binding="{Binding CreatedBy.Username}" Header="إنشاء" />
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>

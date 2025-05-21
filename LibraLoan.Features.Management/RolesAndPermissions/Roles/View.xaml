@@ -59,7 +59,7 @@
             ItemsSource="{Binding Models, IsAsync=True}">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Name}" Header="الاسم" />
-                <DataGridTextColumn Binding="{Binding DateCreated, StringFormat='yyyy/MM/dd HH:mm'}" Header="تاريخ الانشاء" />
+                <DataGridTextColumn Binding="{Binding DateCreated, StringFormat='yyyy/MM/dd HH:mm'}" Header="تاريخ الإضافة" />
 
                 <DataGridTemplateColumn MaxWidth="300" Header="الصلاحيات">
 
