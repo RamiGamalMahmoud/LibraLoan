@@ -6,16 +6,30 @@
     xmlns:local="clr-namespace:LibraLoan.Resources"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+    Name="MyWindow"
     Title="رسالة تأكيد"
-    Width="400"
     Padding="20"
     d:Background="White"
+    AllowsTransparency="True"
     FontFamily="{StaticResource FontFamily}"
-    SizeToContent="Height"
+    ShowInTaskbar="False"
     WindowStartupLocation="CenterScreen"
+    WindowState="Maximized"
+    WindowStyle="None"
     mc:Ignorable="d">
 
-    <Border Padding="10" FlowDirection="RightToLeft">
+
+    <Window.Background>
+        <SolidColorBrush Opacity="0.3" Color="Black" />
+    </Window.Background>
+
+    <Border
+        Padding="50,20"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        Background="{StaticResource WhiteBrush}"
+        CornerRadius="5"
+        FlowDirection="RightToLeft">
         <Grid>
 
             <Grid.RowDefinitions>
