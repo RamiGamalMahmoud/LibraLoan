@@ -21,7 +21,14 @@ namespace LibraLoan.Features.Books.Listing
             }
             else
             {
-                Models = _tempModels.Where(x => x.Title.Contains(SearchText)).ToList();
+                Models = _tempModels
+                    .Where(x => 
+                    x.Title.Contains(SearchText)
+                    || x.Isbn.Contains(SearchText)
+                    || x.Authors.Any(a => a.Name.Contains(SearchText))
+                    || x.Publisher.Name.Contains(SearchText)
+                    )
+                    .ToList();
             }
             return Task.CompletedTask;
         }

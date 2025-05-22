@@ -4,6 +4,7 @@ using LibraLoan.Core.Common;
 using LibraLoan.Core.Models;
 using MediatR;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace LibraLoan.Features.Loans.Listing
@@ -35,6 +36,21 @@ namespace LibraLoan.Features.Loans.Listing
             if (!_messenger.Send(new Core.Messages.Common.ConfigrRequestMessge($"هل تريد إلغاء ارجاع الكتاب : {model.Book.Title}؟"))) return;
             await _mediator.Send(new CommandHandlers.CancelReturnCommand.Command(model));
             model.CancelReturn();
+        }
+
+        protected override Task SearchAsync()
+        {
+            if (string.IsNullOrEmpty(SearchText))
+            {
+                Models = _tempModels;
+            }
+            else
+            {
+                Models = _tempModels
+                    .Where(x => x.Book.Title.Contains(SearchText) || x.Client.Name.Contains(SearchText) || x.Book.Isbn.Contains(SearchText))
+                    .ToList();
+            }
+            return Task.CompletedTask;
         }
     }
 }

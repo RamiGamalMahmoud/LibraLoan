@@ -2,6 +2,8 @@
 using LibraLoan.Core.Common;
 using LibraLoan.Core.Models;
 using MediatR;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace LibraLoan.Features.Authors.Listing
 {
@@ -9,6 +11,13 @@ namespace LibraLoan.Features.Authors.Listing
     {
         public ViewModel(IMediator mediator, IMessenger messenger) : base(mediator, messenger)
         {
+        }
+
+        protected override Task SearchAsync()
+        {
+            Models = _tempModels.Where(x => x.Name.Contains(SearchText));
+
+            return Task.CompletedTask;
         }
     }
 }

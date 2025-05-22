@@ -102,7 +102,7 @@
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
 
-                <DataGridTextColumn Binding="{Binding DateCreated, StringFormat=yyyy-MM-dd hh:mm tt}">
+                <DataGridTextColumn Binding="{Binding DateCreated, StringFormat=yyyy-MM-dd}">
                     <DataGridTextColumn.Header>
                         <StackPanel Orientation="Horizontal">
                             <md:PackIcon Foreground="{StaticResource BlueBrush}" Kind="CalendarAdd" />
