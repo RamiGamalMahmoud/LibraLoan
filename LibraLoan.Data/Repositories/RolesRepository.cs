@@ -26,7 +26,12 @@ namespace LibraLoan.Data.Repositories
 
                 IEnumerable<int> permissionIds = model.Permissions.Select(x => x.Id).ToList();
 
-                IEnumerable<Permission> permissions = await dbContext.Permissions.Where(x => permissionIds.Contains(x.Id)).ToListAsync();
+                IEnumerable<Permission> permissions = await dbContext
+                    .Permissions
+                    .Where(x => permissionIds.Contains(x.Id))
+                    .Include(x => x.Resource)
+                    .Include(x => x.Action)
+                    .ToListAsync();
 
                 foreach (Permission permission in permissions)
                 {
