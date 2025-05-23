@@ -3,8 +3,10 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using LibraLoan.Core;
 using LibraLoan.Core.Abstraction.Services;
+using LibraLoan.Core.Models;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using ActionModel = LibraLoan.Core.Models.Action;
 using System.Collections.ObjectModel;
 
 namespace LibraLoan
@@ -40,12 +42,36 @@ namespace LibraLoan
 
         private void IntializeCommands()
         {
-            NavigationCommands.Add(new NavigationCommand("المتسخدمون و الصلاحيات", "AccountGroup", () => SetCurrentView(typeof(Core.Abstraction.Features.Management.IManagementHomeView))));
-            NavigationCommands.Add(new NavigationCommand("المؤلفون", "AccountTie", () => SetCurrentView(typeof(Core.Abstraction.Features.Authors.IAuthorsListingView))));
-            NavigationCommands.Add(new NavigationCommand("دور النشر", "HospitalBuilding", () => SetCurrentView(typeof(Core.Abstraction.Features.Publishers.IPublishersListingView))));
-            NavigationCommands.Add(new NavigationCommand("الكتب", "Bookshelf", () => SetCurrentView(typeof(Core.Abstraction.Features.Books.IBooksListingView))));
-            NavigationCommands.Add(new NavigationCommand("العملاء", "AccountGroupOutline", () => SetCurrentView(typeof(Core.Abstraction.Features.Clients.IClientsListingView))));
-            NavigationCommands.Add(new NavigationCommand("الاستعارة", "SwapHorizontal", () => SetCurrentView(typeof(Core.Abstraction.Features.Loans.ILoansListingView))));
+            NavigationCommands.Add(new NavigationCommand("المتسخدمون و الصلاحيات",
+                "AccountGroup",
+                () => SetCurrentView(typeof(Core.Abstraction.Features.Management.IManagementHomeView)),
+                AppStateService.CurrentUser.HasPermission(Resource.ManagementResource, ActionModel.ReadAction)));
+
+
+            NavigationCommands.Add(new NavigationCommand("المؤلفون",
+                "AccountTie",
+                () => SetCurrentView(typeof(Core.Abstraction.Features.Authors.IAuthorsListingView)),
+                AppStateService.CurrentUser.HasPermission(Resource.AuthorsResource, ActionModel.ReadAction)));
+
+            NavigationCommands.Add(new NavigationCommand("دور النشر",
+                "HospitalBuilding",
+                () => SetCurrentView(typeof(Core.Abstraction.Features.Publishers.IPublishersListingView)),
+                AppStateService.CurrentUser.HasPermission(Resource.PublishersResource, ActionModel.ReadAction)));
+
+            NavigationCommands.Add(new NavigationCommand("الكتب",
+                "Bookshelf",
+                () => SetCurrentView(typeof(Core.Abstraction.Features.Books.IBooksListingView)),
+                AppStateService.CurrentUser.HasPermission(Resource.BooksResource, ActionModel.ReadAction)));
+
+            NavigationCommands.Add(new NavigationCommand("العملاء",
+                "AccountGroupOutline",
+                () => SetCurrentView(typeof(Core.Abstraction.Features.Clients.IClientsListingView)),
+                AppStateService.CurrentUser.HasPermission(Resource.ClientsResource, ActionModel.ReadAction)));
+
+            NavigationCommands.Add(new NavigationCommand("الاستعارة",
+                "SwapHorizontal",
+                () => SetCurrentView(typeof(Core.Abstraction.Features.Loans.ILoansListingView)),
+                AppStateService.CurrentUser.HasPermission(Resource.LoansResource, ActionModel.ReadAction)));
         }
 
         [ObservableProperty]

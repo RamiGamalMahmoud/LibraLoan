@@ -7,5 +7,10 @@ namespace LibraLoan.Core.Models
     {
         [ObservableProperty]
         private string _name;
+
+        public const string CreateAction = "إنشاء";
+        public const string ReadAction = "قراءة";
+        public const string UpdateAction = "تحديث";
+        public const string DeleteAction = "حذف";
     }
 }

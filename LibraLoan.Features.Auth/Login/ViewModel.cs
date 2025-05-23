@@ -45,7 +45,15 @@ namespace LibraLoan.Features.Auth.Login
         {
             using(AppDbContext dbContext = _dbContextFactory.CreateDbContext())
             {
-                User user = await dbContext.Users.FirstOrDefaultAsync(x => x.Username == UserName);
+                User user = await dbContext
+                    .Users
+                    .Include(user => user.Role)
+                        .ThenInclude(role => role.Permissions)
+                        .ThenInclude(permission => permission.Resource)
+                    .Include(user => user.Role)
+                        .ThenInclude(role => role.Permissions)
+                        .ThenInclude(permission => permission.Action)
+                    .FirstOrDefaultAsync(x => x.Username == UserName);
                 if(user is null)
                 {
                     _messenger.Send(new Core.Messages.LoginFailedMessage());

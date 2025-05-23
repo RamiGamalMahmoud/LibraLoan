@@ -66,7 +66,7 @@ namespace LibraLoan
                 ShowMainWindow();
             });
 
-            _messenger.Register<Core.Messages.Common.LogoutMessage>(this, (r, m) => Logout());
+            _messenger.Register<Core.Messages.Common.LogoutMessage>(this, (r, m) => Restart());
 
             _messenger.Register<Core.Messages.Common.ConfigrRequestMessge>(this, (r, m) =>
             {

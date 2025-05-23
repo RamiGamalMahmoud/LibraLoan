@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System.Linq;
 
 namespace LibraLoan.Core.Models
 {
@@ -20,5 +21,10 @@ namespace LibraLoan.Core.Models
         private Role _role;
 
         public bool IsAdmin { get; private set; }
+
+        public bool HasPermission(string resource, string action)
+        {
+            return IsAdmin || Role.Permissions.Any(x => x.Resource.Name == resource && x.Action.Name == action);
+        }
     }
 }

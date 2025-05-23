@@ -7,6 +7,7 @@
     xmlns:local="clr-namespace:LibraLoan.Features.Management.RolesAndPermissions.Roles"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mdc="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
     d:Background="White"
     d:DataContext="{d:DesignInstance Type=local:ViewModel}"
     d:DesignHeight="450"
@@ -31,7 +32,8 @@
                 BorderBrush="{StaticResource SuccessBrush}"
                 Command="{Binding ShowCreateCommand}"
                 Foreground="{StaticResource SuccessBrush}"
-                Style="{StaticResource MaterialDesignOutlinedButton}">
+                Style="{StaticResource MaterialDesignOutlinedButton}"
+                Visibility="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsEnabled, Converter={x:Static mdc:BooleanToVisibilityConverter.CollapsedInstance}}">
                 <StackPanel Orientation="Horizontal">
                     <md:PackIcon
                         Margin="0,0,5,0"
@@ -139,7 +141,8 @@
                                     VerticalAlignment="Center"
                                     Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.ShowUpdateCommand}"
                                     CommandParameter="{Binding}"
-                                    Style="{StaticResource MaterialDesignFlatButton}">
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Visibility="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsEnabled, Converter={x:Static mdc:BooleanToVisibilityConverter.CollapsedInstance}}">
                                     <StackPanel Orientation="Horizontal">
                                         <md:PackIcon Kind="Pencil" />
                                         <TextBlock
@@ -157,7 +160,8 @@
                                     Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.DeleteCommand}"
                                     CommandParameter="{Binding}"
                                     Foreground="{StaticResource DangerBrush}"
-                                    Style="{StaticResource MaterialDesignFlatButton}">
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Visibility="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsEnabled, Converter={x:Static mdc:BooleanToVisibilityConverter.CollapsedInstance}}">
                                     <StackPanel Orientation="Horizontal">
                                         <md:PackIcon Kind="Delete" />
                                         <TextBlock

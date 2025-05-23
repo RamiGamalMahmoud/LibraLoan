@@ -40,10 +40,10 @@ namespace LibraLoan.Data.Configurations
 
             builder.HasData(new[]
             {
-                new { Id = 1, DateCreated = System.DateTime.Parse("2025-04-01 00:00:00"), Name = "إنشاء" },
-                new { Id = 2, DateCreated = System.DateTime.Parse("2025-04-01 00:00:00"), Name = "قراءة" },
-                new { Id = 3, DateCreated = System.DateTime.Parse("2025-04-01 00:00:00"), Name = "تحديث" },
-                new { Id = 4, DateCreated = System.DateTime.Parse("2025-04-01 00:00:00"), Name = "حذف" },
+                new { Id = 1, DateCreated = System.DateTime.Parse("2025-04-01 00:00:00"), Name = Action.CreateAction },
+                new { Id = 2, DateCreated = System.DateTime.Parse("2025-04-01 00:00:00"), Name = Action.ReadAction },
+                new { Id = 3, DateCreated = System.DateTime.Parse("2025-04-01 00:00:00"), Name = Action.UpdateAction },
+                new { Id = 4, DateCreated = System.DateTime.Parse("2025-04-01 00:00:00"), Name = Action.DeleteAction },
             });
         }
     }
@@ -62,12 +62,13 @@ namespace LibraLoan.Data.Configurations
 
             builder.HasData(new[]
             {
-                new { Id = 1, DateCreated = System.DateTime.Parse("2025-04-01 00:00:00"), Name = "المستخدمون" },
-                new { Id = 2, DateCreated = System.DateTime.Parse("2025-04-01 00:00:00"), Name = "إدارة" },
-                new { Id = 3, DateCreated = System.DateTime.Parse("2025-04-01 00:00:00"), Name = "المؤلفون" },
-                new { Id = 4, DateCreated = System.DateTime.Parse("2025-04-01 00:00:00"), Name = "دور النشر" },
-                new { Id = 5, DateCreated = System.DateTime.Parse("2025-04-01 00:00:00"), Name = "الكتب" },
-                new { Id = 6, DateCreated = System.DateTime.Parse("2025-04-01 00:00:00"), Name = "الاستعارة" },
+                new { Id = 1, DateCreated = System.DateTime.Parse("2025-04-01 00:00:00"), Name = Resource.UsersResource },
+                new { Id = 2, DateCreated = System.DateTime.Parse("2025-04-01 00:00:00"), Name = Resource.ManagementResource },
+                new { Id = 3, DateCreated = System.DateTime.Parse("2025-04-01 00:00:00"), Name = Resource.AuthorsResource },
+                new { Id = 4, DateCreated = System.DateTime.Parse("2025-04-01 00:00:00"), Name = Resource.PublishersResource },
+                new { Id = 5, DateCreated = System.DateTime.Parse("2025-04-01 00:00:00"), Name = Resource.BooksResource },
+                new { Id = 6, DateCreated = System.DateTime.Parse("2025-04-01 00:00:00"), Name = Resource.LoansResource },
+                new { Id = 7, DateCreated = System.DateTime.Parse("2025-04-01 00:00:00"), Name = Resource.ClientsResource },
             });
         }
     }

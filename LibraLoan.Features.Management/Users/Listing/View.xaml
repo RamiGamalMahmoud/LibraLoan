@@ -33,7 +33,8 @@
                     BorderBrush="{StaticResource SuccessBrush}"
                     Command="{Binding ShowCreateCommand}"
                     Foreground="{StaticResource SuccessBrush}"
-                    Style="{StaticResource MaterialDesignOutlinedButton}">
+                    Style="{StaticResource MaterialDesignOutlinedButton}"
+                    Visibility="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsEnabled, Converter={x:Static mdc:BooleanToVisibilityConverter.CollapsedInstance}}">
                     <StackPanel Orientation="Horizontal">
                         <md:PackIcon
                             Margin="0,0,5,0"
@@ -74,14 +75,28 @@
             ItemsSource="{Binding Models}">
 
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Username}">
-                    <DataGridTextColumn.Header>
+
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.Header>
                         <StackPanel Orientation="Horizontal">
                             <md:PackIcon Foreground="{StaticResource BlueBrush}" Kind="User" />
                             <TextBlock Margin="5,0,0,0" Text="اسم المستخدم" />
                         </StackPanel>
-                    </DataGridTextColumn.Header>
-                </DataGridTextColumn>
+                    </DataGridTemplateColumn.Header>
+
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <md:PackIcon
+                                    Foreground="{StaticResource DangerBrush}"
+                                    Kind="Administrator"
+                                    Visibility="{Binding IsAdmin, Converter={x:Static mdc:BooleanToVisibilityConverter.CollapsedInstance}}" />
+                                <TextBlock Margin="5,0,0,0" Text="{Binding Username}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+
+                </DataGridTemplateColumn>
 
                 <DataGridTextColumn Binding="{Binding DateCreated}">
                     <DataGridTextColumn.Header>
@@ -169,7 +184,8 @@
                                     Padding="5"
                                     Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.ShowUpdateCommand}"
                                     CommandParameter="{Binding}"
-                                    Style="{StaticResource MaterialDesignFlatButton}">
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Visibility="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsEnabled, Converter={x:Static mdc:BooleanToVisibilityConverter.CollapsedInstance}}">
                                     <StackPanel Orientation="Horizontal">
                                         <md:PackIcon Margin="0,0,5,0" Kind="Pencil" />
                                         <TextBlock
@@ -186,7 +202,7 @@
                                     CommandParameter="{Binding}"
                                     Foreground="{StaticResource DangerBrush}"
                                     Style="{StaticResource MaterialDesignFlatButton}"
-                                    Visibility="{Binding IsAdmin, Converter={x:Static mdc:BooleanToVisibilityConverter.NotCollapsedInstance}}">
+                                    Visibility="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsEnabled, Converter={x:Static mdc:BooleanToVisibilityConverter.CollapsedInstance}}">
                                     <StackPanel Orientation="Horizontal">
                                         <md:PackIcon Margin="0,0,5,0" Kind="Delete" />
                                         <TextBlock

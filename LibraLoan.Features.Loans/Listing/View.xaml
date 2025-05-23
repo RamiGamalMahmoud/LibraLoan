@@ -32,7 +32,8 @@
                     BorderBrush="{StaticResource SuccessBrush}"
                     Command="{Binding ShowCreateCommand}"
                     Foreground="{StaticResource SuccessBrush}"
-                    Style="{StaticResource MaterialDesignOutlinedButton}">
+                    Style="{StaticResource MaterialDesignOutlinedButton}"
+                    Visibility="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsEnabled, Converter={x:Static mdc:BooleanToVisibilityConverter.CollapsedInstance}}">
                     <StackPanel Orientation="Horizontal">
                         <md:PackIcon
                             Margin="0,0,5,0"
@@ -236,7 +237,8 @@
                                     Padding="5"
                                     Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.ShowUpdateCommand}"
                                     CommandParameter="{Binding}"
-                                    Style="{StaticResource MaterialDesignFlatButton}">
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Visibility="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsEnabled, Converter={x:Static mdc:BooleanToVisibilityConverter.CollapsedInstance}}">
                                     <StackPanel Orientation="Horizontal">
                                         <md:PackIcon Margin="0,0,5,0" Kind="Pencil" />
                                         <TextBlock
@@ -252,7 +254,8 @@
                                     Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.DeleteCommand}"
                                     CommandParameter="{Binding}"
                                     Foreground="{StaticResource DangerBrush}"
-                                    Style="{StaticResource MaterialDesignFlatButton}">
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Visibility="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsEnabled, Converter={x:Static mdc:BooleanToVisibilityConverter.CollapsedInstance}}">
                                     <StackPanel Orientation="Horizontal">
                                         <md:PackIcon Margin="0,0,5,0" Kind="Delete" />
                                         <TextBlock

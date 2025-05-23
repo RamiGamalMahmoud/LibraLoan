@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using LibraLoan.Core.Abstraction.Services;
 using MediatR;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,10 +10,11 @@ namespace LibraLoan.Core.Common
 {
     public abstract partial class ListingViewModelBase<TModel> : ObservableObject where TModel : class
     {
-        public ListingViewModelBase(IMediator mediator, IMessenger messenger)
+        public ListingViewModelBase(IMediator mediator, IMessenger messenger, IAppStateService appStateService)
         {
             _mediator = mediator;
             _messenger = messenger;
+            _appStateService = appStateService;
         }
 
         protected string _deleteMessage = "هل تريد الحذف؟";
@@ -76,5 +78,6 @@ namespace LibraLoan.Core.Common
         protected virtual bool CanCreate() => true;
         protected readonly IMediator _mediator;
         protected readonly IMessenger _messenger;
+        protected readonly IAppStateService _appStateService;
     }
 }

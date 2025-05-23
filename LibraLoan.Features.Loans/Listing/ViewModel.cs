@@ -1,17 +1,19 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using LibraLoan.Core.Abstraction.Services;
 using LibraLoan.Core.Common;
 using LibraLoan.Core.Models;
 using MediatR;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using ActionModel = LibraLoan.Core.Models.Action;
 
 namespace LibraLoan.Features.Loans.Listing
 {
     internal partial class ViewModel : ListingViewModelBase<Loan>
     {
-        public ViewModel(IMediator mediator, IMessenger messenger) : base(mediator, messenger)
+        public ViewModel(IMediator mediator, IMessenger messenger, IAppStateService appStateService) : base(mediator, messenger, appStateService)
         {
         }
 
@@ -51,6 +53,21 @@ namespace LibraLoan.Features.Loans.Listing
                     .ToList();
             }
             return Task.CompletedTask;
+        }
+
+        protected override bool CanCreate()
+        {
+            return _appStateService.CurrentUser.HasPermission(Resource.LoansResource, ActionModel.CreateAction) && base.CanCreate();
+        }
+
+        protected override bool CanDelete(Loan model)
+        {
+            return base.CanDelete(model) && _appStateService.CurrentUser.HasPermission(Resource.LoansResource, ActionModel.DeleteAction);
+        }
+
+        protected override bool CanUpdate(Loan model)
+        {
+            return base.CanUpdate(model) && _appStateService.CurrentUser.HasPermission(Resource.LoansResource, ActionModel.UpdateAction);
         }
     }
 }
