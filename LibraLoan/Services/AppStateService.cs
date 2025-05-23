@@ -21,7 +21,7 @@ namespace LibraLoan.Services
             private set => SetProperty(ref _currentUser, value);
         }
 
-        public string AppVersion => "0.0.4";
+        public string AppVersion => "0.0.15";
 
         public void SetCurrentUser(User user) => CurrentUser = user;
     }
