@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace LibraLoan.Features.Management.RolesAndPermissions.Roles.Editor
 {
@@ -27,5 +28,13 @@ namespace LibraLoan.Features.Management.RolesAndPermissions.Roles.Editor
         }
 
         private void Button_Click(object sender, RoutedEventArgs e) => Close();
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            if(sender is CheckBox permissionCheckPox)
+            {
+                permissionCheckPox.Command?.Execute(permissionCheckPox.CommandParameter);
+            }
+        }
     }
 }

@@ -30,6 +30,7 @@ namespace LibraLoan.Features.Management.RolesAndPermissions.Roles.Editor
                 .ToList();
 
             Resources = Permissions.GroupBy(x => x.Value.Resource.Name);
+            PermissionsGroups = Resources.Select(x => new PermissionsGroup(x.Key, x.ToList())).ToList();
         }
 
         [RelayCommand]
@@ -67,6 +68,9 @@ namespace LibraLoan.Features.Management.RolesAndPermissions.Roles.Editor
         private IEnumerable<SelectableObject<Permission>> _permissions;
 
         public IEnumerable<Permission> SelectedPermissions => Permissions.Where(x => x.IsSelected).Select(x => x.Value);
+
+        [ObservableProperty]
+        public IEnumerable<PermissionsGroup> _permissionsGroups;
         public int SelectedPermissionsCount => SelectedPermissions.Count();
 
         protected readonly IMediator _mediator;

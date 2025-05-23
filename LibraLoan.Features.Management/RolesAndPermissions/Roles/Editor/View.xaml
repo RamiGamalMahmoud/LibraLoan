@@ -73,7 +73,7 @@
                         <StackPanel>
 
 
-                            <ItemsControl ItemsSource="{Binding Resources}">
+                            <ItemsControl ItemsSource="{Binding PermissionsGroups}">
 
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
@@ -83,35 +83,65 @@
 
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <StackPanel Margin="10">
+                                        <Border
+                                            Margin="3"
+                                            Padding="2"
+                                            BorderBrush="LightGray"
+                                            BorderThickness="1"
+                                            CornerRadius="3">
+                                            <StackPanel Margin="10">
 
-                                            <TextBlock HorizontalAlignment="Center" Text="{Binding Key}" />
+                                                <Border
+                                                    Padding="3"
+                                                    Background="{StaticResource MaterialDesign.Brush.Primary}"
+                                                    CornerRadius="3">
+                                                    <TextBlock
+                                                        HorizontalAlignment="Center"
+                                                        Foreground="White"
+                                                        Text="{Binding Resource}" />
+                                                </Border>
 
-                                            <Border>
-                                                <ItemsControl ItemsSource="{Binding}">
-                                                    <ItemsControl.ItemTemplate>
-                                                        <DataTemplate>
-                                                            <Border
-                                                                Margin="3"
-                                                                Padding="10,3"
-                                                                Background="White"
-                                                                BorderBrush="LightGray"
-                                                                BorderThickness="1"
-                                                                CornerRadius="2">
-                                                                <CheckBox
-                                                                    Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DataContext.UpdateSelectionCommand}"
-                                                                    CommandParameter="{Binding}"
-                                                                    Content="{Binding Value.Action.Name}"
-                                                                    Cursor="Hand"
-                                                                    IsChecked="{Binding IsSelected}"
-                                                                    Selector.SelectionChanged="CheckBox_SelectionChanged" />
-                                                            </Border>
-                                                        </DataTemplate>
-                                                    </ItemsControl.ItemTemplate>
-                                                </ItemsControl>
-                                            </Border>
-
-                                        </StackPanel>
+                                                <Border>
+                                                    <ItemsControl ItemsSource="{Binding Permissions}">
+                                                        <ItemsControl.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <Border
+                                                                    Margin="0,3"
+                                                                    Padding="10,3"
+                                                                    Background="White"
+                                                                    BorderBrush="LightGray"
+                                                                    BorderThickness="1"
+                                                                    CornerRadius="2">
+                                                                    <CheckBox
+                                                                        Checked="CheckBox_Checked"
+                                                                        Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DataContext.UpdateSelectionCommand}"
+                                                                        CommandParameter="{Binding}"
+                                                                        Content="{Binding Value.Action.Name}"
+                                                                        Cursor="Hand"
+                                                                        IsChecked="{Binding IsSelected}"
+                                                                        Selector.SelectionChanged="CheckBox_SelectionChanged"
+                                                                        Unchecked="CheckBox_Checked" />
+                                                                </Border>
+                                                            </DataTemplate>
+                                                        </ItemsControl.ItemTemplate>
+                                                    </ItemsControl>
+                                                </Border>
+                                                <CheckBox Width="100" IsChecked="{Binding IsSelectedAll, UpdateSourceTrigger=PropertyChanged}">
+                                                    <CheckBox.Style>
+                                                        <Style BasedOn="{StaticResource MaterialDesignChoiceChipPrimaryRadioButton}" TargetType="CheckBox">
+                                                            <Style.Triggers>
+                                                                <Trigger Property="IsChecked" Value="True">
+                                                                    <Setter Property="Content" Value="الغاء تحديد الكل" />
+                                                                </Trigger>
+                                                                <Trigger Property="IsChecked" Value="False">
+                                                                    <Setter Property="Content" Value="تحديد الكل" />
+                                                                </Trigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </CheckBox.Style>
+                                                </CheckBox>
+                                            </StackPanel>
+                                        </Border>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
 

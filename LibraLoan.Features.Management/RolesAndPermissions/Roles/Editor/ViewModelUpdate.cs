@@ -37,6 +37,7 @@ namespace LibraLoan.Features.Management.RolesAndPermissions.Roles.Editor
             }
 
             Resources = Permissions.GroupBy(x => x.Value.Resource.Name);
+            PermissionsGroups = Resources.Select(x => new PermissionsGroup(x.Key, x.ToList() )).ToList();
 
         }
 

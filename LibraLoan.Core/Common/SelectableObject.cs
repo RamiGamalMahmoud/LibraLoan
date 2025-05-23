@@ -1,6 +1,8 @@
-﻿namespace LibraLoan.Core.Common
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+
+namespace LibraLoan.Core.Common
 {
-    public class SelectableObject<T>
+    public partial class SelectableObject<T> : ObservableObject
     {
         public SelectableObject(T value)
         {
@@ -8,7 +10,7 @@
         }
         public T Value { get; }
 
-
-        public bool IsSelected { get; set; }
+        [ObservableProperty]
+        private bool _isSelected;
     }
 }
