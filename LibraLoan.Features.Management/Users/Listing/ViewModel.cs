@@ -45,7 +45,7 @@ namespace LibraLoan.Features.Management.Users.Listing
 
         protected override bool CanDelete(User model)
         {
-            return base.CanDelete(model) && _appStateService.CurrentUser.HasPermission(Resource.ManagementResource, ActionModel.DeleteAction);
+            return base.CanDelete(model) && _appStateService.CurrentUser.HasPermission(Resource.ManagementResource, ActionModel.DeleteAction) && !model.IsAdmin;
         }
 
         protected override bool CanUpdate(User model)
