@@ -17,7 +17,7 @@ namespace LibraLoan.Data.Repositories
 
         public virtual async Task<bool> DeleteAsync(TModel model)
         {
-            using(AppDbContext dbContext = _dbContextFactory.CreateDbContext())
+            using (AppDbContext dbContext = _dbContextFactory.CreateDbContext())
             {
                 TModel dbModel = await dbContext.Set<TModel>().FindAsync(model.Id);
                 dbContext.Set<TModel>().Remove(dbModel);
@@ -38,7 +38,7 @@ namespace LibraLoan.Data.Repositories
 
         protected IEnumerable<TModel> SetModels(IEnumerable<TModel> models)
         {
-            if (_models is null || _models.Count == 0) _models = new ObservableCollection<TModel>(models);
+            _models = new ObservableCollection<TModel>(models);
             _isLoaded = true;
             return _models;
         }

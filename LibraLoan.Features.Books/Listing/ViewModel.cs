@@ -12,6 +12,15 @@ namespace LibraLoan.Features.Books.Listing
     {
         public ViewModel(IMediator mediator, IMessenger messenger, IAppStateService appStateService) : base(mediator, messenger, appStateService)
         {
+            _messenger.Register<Core.Messages.Books.BookReturnedMessage>(this, async (r, m) =>
+            {
+                await LoadDataAsync(true);
+            });
+
+            _messenger.Register<Core.Messages.Books.BookLoanedMessage>(this, async (r, m) =>
+            {
+                await LoadDataAsync(true);
+            });
         }
 
         protected override Task SearchAsync()

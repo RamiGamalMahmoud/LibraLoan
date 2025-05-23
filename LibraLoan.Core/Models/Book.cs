@@ -25,14 +25,16 @@ namespace LibraLoan.Core.Models
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(IsAvailable))]
+        [NotifyPropertyChangedFor(nameof(AvailableCopies))]
         private int _copies = 1;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(IsAvailable))]
+        [NotifyPropertyChangedFor(nameof(AvailableCopies))]
         private int _loanedCopies = 0;
 
         public bool IsAvailable => Copies - LoanedCopies > 0;
-
+        public int AvailableCopies => Copies - LoanedCopies;
         public int PublisherId { get; set; }
         [ObservableProperty]
         private Publisher _publisher;

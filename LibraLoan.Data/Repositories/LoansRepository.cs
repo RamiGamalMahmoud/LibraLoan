@@ -13,11 +13,28 @@ namespace LibraLoan.Data.Repositories
     {
         public async Task CancelReturn(Loan model)
         {
-            using(AppDbContext dbContext = _dbContextFactory.CreateDbContext())
+            using (AppDbContext dbContext = _dbContextFactory.CreateDbContext())
             {
-                Loan loan = await dbContext.Loans.FindAsync(model.Id);
-                loan.CancelReturn();
-                await dbContext.SaveChangesAsync();
+                using (IDbContextTransaction transaction = await dbContext.Database.BeginTransactionAsync())
+                {
+                    Book book = await dbContext.Books.FindAsync(model.BookId);
+                    book.LoanedCopies++;
+
+                    Loan loan = await dbContext.Loans.FindAsync(model.Id);
+                    loan.CancelReturn();
+
+
+                    try
+                    {
+                        await dbContext.SaveChangesAsync();
+                        await transaction.CommitAsync();
+                    }
+                    catch (Exception)
+                    {
+                        await transaction.RollbackAsync();
+                        throw;
+                    }
+                }
             }
         }
 
@@ -25,33 +42,38 @@ namespace LibraLoan.Data.Repositories
         {
             using (AppDbContext dbContext = _dbContextFactory.CreateDbContext())
             {
-                using(IDbContextTransaction transaction = await dbContext.Database.BeginTransactionAsync())
+                using (IDbContextTransaction transaction = await dbContext.Database.BeginTransactionAsync())
                 {
                     Book book = await dbContext.Books.FindAsync(model.Book.Id);
-                }
-                Loan loan = new Loan()
-                {
-                    DateCreated = DateTime.Now,
-                    ExpectedReturnDate = (DateTime)model.ExpectedReturnDate,
-                    LoanDate = model.LoanDate,
-                    BookId = model.Book.Id,
-                    ClientId = model.Client.Id,
-                    CreatedById = model.CreatedBy.Id
-                };
+                    book.LoanedCopies++;
+                    Loan loan = new Loan()
+                    {
+                        DateCreated = DateTime.Now,
+                        ExpectedReturnDate = (DateTime)model.ExpectedReturnDate,
+                        LoanDate = model.LoanDate,
+                        BookId = model.Book.Id,
+                        ClientId = model.Client.Id,
+                        CreatedById = model.CreatedBy.Id
+                    };
 
-                dbContext.Add(loan);
-                try
-                {
-                    await dbContext.SaveChangesAsync();
-                    _models.Add(loan);
-                    loan.Book = model.Book;
-                    loan.Client = model.Client;
-                    loan.CreatedBy = model.CreatedBy;
-                    return loan;
-                }
-                catch (Exception)
-                {
-                    return null;
+                    dbContext.Loans.Add(loan);
+                    dbContext.Books.Update(book);
+                    try
+                    {
+                        await dbContext.SaveChangesAsync();
+                        _models.Add(loan);
+                        await transaction.CommitAsync();
+
+                        loan.Book = model.Book;
+                        loan.Client = model.Client;
+                        loan.CreatedBy = model.CreatedBy;
+                        return loan;
+                    }
+                    catch (Exception)
+                    {
+                        await transaction.RollbackAsync();
+                        return null;
+                    }
                 }
             }
         }
@@ -77,11 +99,26 @@ namespace LibraLoan.Data.Repositories
 
         public async Task ReturnBook(Loan loan, DateTime returnDate)
         {
-            using(AppDbContext dbContext = _dbContextFactory.CreateDbContext())
+            using (AppDbContext dbContext = _dbContextFactory.CreateDbContext())
             {
-                Loan loanToUpdate = await dbContext.Loans.FindAsync(loan.Id);
-                loanToUpdate.Return(returnDate);
-                dbContext.SaveChanges();
+                using (IDbContextTransaction transaction = await dbContext.Database.BeginTransactionAsync())
+                {
+                    Book book = await dbContext.Books.FindAsync(loan.BookId);
+                    book.LoanedCopies--;
+
+                    Loan loanToUpdate = await dbContext.Loans.FindAsync(loan.Id);
+                    loanToUpdate.Return(returnDate);
+                    try
+                    {
+                        dbContext.SaveChanges();
+                        await transaction.CommitAsync();
+                    }
+                    catch (Exception)
+                    {
+                        await transaction.RollbackAsync();
+                        throw;
+                    }
+                }
             }
         }
 
@@ -95,7 +132,7 @@ namespace LibraLoan.Data.Repositories
                 loan.BookId = model.Book.Id;
                 loan.ClientId = model.Client.Id;
 
-                if(model.ActualReturnDate.HasValue)
+                if (model.ActualReturnDate.HasValue)
                 {
                     loan.Return(model.ActualReturnDate);
                 }

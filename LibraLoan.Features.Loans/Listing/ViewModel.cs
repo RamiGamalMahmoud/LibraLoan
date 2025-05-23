@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Messaging;
 using LibraLoan.Core.Abstraction.Services;
 using LibraLoan.Core.Common;
 using LibraLoan.Core.Models;
+using LibraLoan.Resources;
 using MediatR;
 using System;
 using System.Linq;
@@ -20,11 +21,23 @@ namespace LibraLoan.Features.Loans.Listing
         [RelayCommand]
         private async Task ReturnBook(Loan loan)
         {
-            if (!_messenger.Send(new Core.Messages.Common.ConfigrRequestMessge($"هل تريد ارجاع الكتاب : {loan.Book.Title}؟"))) return;
+            DateWindow dateWindow = new DateWindow($"تاريخ الاستعارة : {loan.LoanDate:yyyy-MM-dd}");
+            if(dateWindow.ShowDialog() is false) return;
+
+            DateTime? selectedDate = dateWindow.ViewModel.SelectedDate;
+
+            if(selectedDate < loan.LoanDate)
+            {
+                _messenger.Send(new Core.Messages.Common.ErrorMessage("لا يمكن ارجاع الكتاب في تاريخ يسبق تاريخ الاستعارة"));
+                return;
+            }
+
             try
             {
-                await _mediator.Send(new CommandHandlers.ReturnBookCommand.Command(loan, DateTime.Now));
-                loan.Return();
+                await _mediator.Send(new CommandHandlers.ReturnBookCommand.Command(loan, (DateTime)selectedDate));
+                _messenger.Send(new Core.Messages.Books.BookLoanedMessage(loan.Book.Id));
+                _messenger.Send(new Core.Messages.Common.SuccessMessage($"تم ارجاع الكتاب : {loan.Book.Title}"));
+                loan.Return(selectedDate);
             }
             catch (Exception)
             {
@@ -38,6 +51,8 @@ namespace LibraLoan.Features.Loans.Listing
             if (!_messenger.Send(new Core.Messages.Common.ConfigrRequestMessge($"هل تريد إلغاء ارجاع الكتاب : {model.Book.Title}؟"))) return;
             await _mediator.Send(new CommandHandlers.CancelReturnCommand.Command(model));
             model.CancelReturn();
+            _messenger.Send(new Core.Messages.Books.BookReturnedMessage(model.Book.Id));
+            _messenger.Send(new Core.Messages.Common.SuccessMessage($"تم إلغاء ارجاع الكتاب : {model.Book.Title}"));
         }
 
         protected override Task SearchAsync()

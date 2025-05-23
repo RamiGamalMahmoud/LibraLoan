@@ -121,14 +121,90 @@
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
 
+                <DataGridTextColumn Binding="{Binding LoanedCopies}">
+                    <DataGridTextColumn.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <md:PackIcon Foreground="{StaticResource BlueBrush}" Kind="Counter" />
+                            <TextBlock Margin="5,0,0,0" Text="عدد النسخ المستعارة" />
+                        </StackPanel>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Binding="{Binding AvailableCopies}" TextBlock.TextAlignment="Center">
+                    <DataGridTextColumn.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <md:PackIcon Foreground="{StaticResource BlueBrush}" Kind="Counter" />
+                            <TextBlock
+                                Margin="5,0,0,0"
+                                Text="عدد النسخ المتاحة"
+                                TextWrapping="WrapWithOverflow" />
+                        </StackPanel>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+
                 <DataGridTextColumn Binding="{Binding Publisher.Name}">
                     <DataGridTextColumn.Header>
                         <StackPanel Orientation="Horizontal">
                             <md:PackIcon Foreground="{StaticResource BlueBrush}" Kind="Building" />
-                            <TextBlock Margin="5,0,0,0" Text="دار النشر" />
+                            <TextBlock
+                                Margin="5,0,0,0"
+                                Text="دار النشر"
+                                TextWrapping="Wrap" />
                         </StackPanel>
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
+
+                <DataGridTemplateColumn SortMemberPath="IsAvailable">
+                    <DataGridTemplateColumn.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <md:PackIcon Foreground="{StaticResource BlueBrush}" Kind="ListStatus" />
+                            <TextBlock Margin="5,0,0,0" Text="الحالة" />
+                        </StackPanel>
+                    </DataGridTemplateColumn.Header>
+
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border
+                                Padding="10"
+                                VerticalAlignment="Center"
+                                CornerRadius="5">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsAvailable}" Value="True">
+                                                <Setter Property="Background" Value="#d1e7dd" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding IsAvailable}" Value="False">
+                                                <Setter Property="Background" Value="Pink" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    FontSize="12"
+                                    FontWeight="Bold">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsAvailable}" Value="True">
+                                                    <Setter Property="Text" Value="متاح" />
+                                                    <Setter Property="Foreground" Value="#198754" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding IsAvailable}" Value="False">
+                                                    <Setter Property="Foreground" Value="DarkRed" />
+                                                    <Setter Property="Text" Value="غير متاح" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+
+                </DataGridTemplateColumn>
 
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.Header>

@@ -30,6 +30,7 @@ namespace LibraLoan.Features.Loans.Editor
             }
 
             _messenger.Send(new Core.Messages.Common.SuccessMessage("تم الحفظ بنجاح"));
+            _messenger.Send(new Core.Messages.Books.BookLoanedMessage(loan.Book.Id));
             ClearInputs();
             HasChanges = false;
         }
