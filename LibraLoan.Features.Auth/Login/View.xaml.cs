@@ -10,10 +10,5 @@ namespace LibraLoan.Features.Auth.Login
             InitializeComponent();
             DataContext = viewModel;
         }
-
-        public new void Show()
-        {
-            ShowDialog();
-        }
     }
 }
