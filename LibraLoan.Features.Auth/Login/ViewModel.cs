@@ -16,11 +16,11 @@ namespace LibraLoan.Features.Auth.Login
     {
         public ViewModel(IAppDbContextFactory dbContextFactory, IPasswordHasher passwordHasher, IMessenger messenger, IAppStateService appStateService)
         {
-            ValidateAllProperties();
             _dbContextFactory = dbContextFactory;
             _passwordHasher = passwordHasher;
             _messenger = messenger;
             AppStateService = appStateService;
+            ValidateAllProperties();
 
 #if DEBUG
             UserName = "admin";
