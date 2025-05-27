@@ -73,9 +73,117 @@
             ColumnHeaderStyle="{StaticResource MyDataGridColumnHeader}"
             FontWeight="Bold"
             IsReadOnly="True"
-            ItemsSource="{Binding Models, IsAsync=True}">
+            ItemsSource="{Binding Models, IsAsync=True}"
+            RowDetailsVisibilityMode="Collapsed">
+
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+
+                    <Border
+                        Margin="10"
+                        Padding="10"
+                        Background="White"
+                        CornerRadius="5">
+                        <Grid>
+
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*" />
+                                <RowDefinition Height="1*" />
+                                <RowDefinition Height="1*" />
+                                <RowDefinition Height="1*" />
+                            </Grid.RowDefinitions>
+
+                            <Border
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Margin="0,5"
+                                Padding="10"
+                                Background="{StaticResource WhiteBrush}"
+                                CornerRadius="5">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock VerticalAlignment="Center" Text="تاريخ النشر : " />
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding PublishDate, StringFormat=yyyy-MM-dd}" />
+                                </StackPanel>
+                            </Border>
+
+                            <Border
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Margin="0,5"
+                                Padding="10"
+                                Background="{StaticResource WhiteBrush}"
+                                CornerRadius="5">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock VerticalAlignment="Center" Text="رقم الإصدار : " />
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding Version}" />
+                                </StackPanel>
+                            </Border>
+
+                            <Border
+                                Grid.Row="2"
+                                Grid.Column="0"
+                                Margin="0,5"
+                                Padding="10"
+                                Background="{StaticResource WhiteBrush}"
+                                CornerRadius="5">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock VerticalAlignment="Center" Text="إجمالي عدد النسخ : " />
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding Copies}" />
+                                </StackPanel>
+                            </Border>
+
+                            <Border
+                                Grid.Row="3"
+                                Grid.Column="0"
+                                Margin="0,5"
+                                Padding="10"
+                                Background="{StaticResource WhiteBrush}"
+                                CornerRadius="5">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock VerticalAlignment="Center" Text="عدد النسخ المستعارة : " />
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding LoanedCopies}" />
+                                </StackPanel>
+                            </Border>
+
+                            <Border
+                                Grid.Row="0"
+                                Grid.RowSpan="4"
+                                Grid.Column="1"
+                                Margin="0,5"
+                                Padding="10"
+                                HorizontalAlignment="Center"
+                                BorderBrush="LightGray"
+                                BorderThickness="1"
+                                CornerRadius="5">
+                                <Image MaxHeight="200" Source="{Binding Photo}" />
+                            </Border>
+
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
 
             <DataGrid.Columns>
+
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                                Padding="0"
+                                Click="Button_Click"
+                                Style="{StaticResource MaterialDesignFlatButton}">
+                                <md:PackIcon Kind="ChevronDown" />
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
                 <DataGridTextColumn Binding="{Binding Title}">
                     <DataGridTextColumn.Header>
                         <StackPanel Orientation="Horizontal">
@@ -90,42 +198,6 @@
                         <StackPanel Orientation="Horizontal">
                             <md:PackIcon Foreground="{StaticResource BlueBrush}" Kind="Identifier" />
                             <TextBlock Margin="5,0,0,0" Text="رقم الكتاب" />
-                        </StackPanel>
-                    </DataGridTextColumn.Header>
-                </DataGridTextColumn>
-
-                <DataGridTextColumn Binding="{Binding PublishDate, StringFormat=yyyy-MM-dd}">
-                    <DataGridTextColumn.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <md:PackIcon Foreground="{StaticResource BlueBrush}" Kind="DateRange" />
-                            <TextBlock Margin="5,0,0,0" Text="تاريخ النشر" />
-                        </StackPanel>
-                    </DataGridTextColumn.Header>
-                </DataGridTextColumn>
-
-                <DataGridTextColumn Binding="{Binding Version}">
-                    <DataGridTextColumn.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <md:PackIcon Foreground="{StaticResource BlueBrush}" Kind="Numeric" />
-                            <TextBlock Margin="5,0,0,0" Text="رقم الإصدار" />
-                        </StackPanel>
-                    </DataGridTextColumn.Header>
-                </DataGridTextColumn>
-
-                <DataGridTextColumn Binding="{Binding Copies}">
-                    <DataGridTextColumn.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <md:PackIcon Foreground="{StaticResource BlueBrush}" Kind="Counter" />
-                            <TextBlock Margin="5,0,0,0" Text="عدد النسخ" />
-                        </StackPanel>
-                    </DataGridTextColumn.Header>
-                </DataGridTextColumn>
-
-                <DataGridTextColumn Binding="{Binding LoanedCopies}">
-                    <DataGridTextColumn.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <md:PackIcon Foreground="{StaticResource BlueBrush}" Kind="Counter" />
-                            <TextBlock Margin="5,0,0,0" Text="عدد النسخ المستعارة" />
                         </StackPanel>
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
@@ -201,25 +273,6 @@
                                     </TextBlock.Style>
                                 </TextBlock>
                             </Border>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-
-                </DataGridTemplateColumn>
-
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <md:PackIcon Foreground="{StaticResource BlueBrush}" Kind="ImageOutline" />
-                            <TextBlock Margin="5,0,0,0" Text="صورة الكتاب" />
-                        </StackPanel>
-                    </DataGridTemplateColumn.Header>
-
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Image
-                                MaxHeight="50"
-                                Source="{Binding Photo}"
-                                Stretch="Uniform" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
 
