@@ -92,7 +92,8 @@
                     Content="إلغاء"
                     Cursor="Hand"
                     FontFamily="Arial"
-                    FontSize="20" />
+                    FontSize="20"
+                    IsCancel="True" />
 
             </Grid>
 

@@ -75,7 +75,8 @@
                     Cursor="Hand"
                     FontFamily="Arial"
                     FontSize="18"
-                    FontWeight="Bold" />
+                    FontWeight="Bold"
+                    IsCancel="True" />
             </StackPanel>
 
         </Grid>

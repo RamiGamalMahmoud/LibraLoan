@@ -299,7 +299,7 @@
                     FontFamily="Arial"
                     FontSize="18"
                     FontWeight="Bold"
-                    IsDefault="True" />
+                    IsCancel="True" />
             </StackPanel>
 
         </Grid>
