@@ -10,14 +10,19 @@ namespace LibraLoan.Features.Management.Users.Listing
             InitializeComponent();
             DataContext = viewModel;
 
-            Loaded += ViewLoaded;
+            Loaded += View_Loaded;
         }
 
-        private async void ViewLoaded(object sender, RoutedEventArgs e)
+        private async void View_Loaded(object sender, RoutedEventArgs e)
         {
-            var viewModel = (ViewModel)DataContext;
-            if (viewModel is null) return;
-            await Dispatcher.InvokeAsync(() => viewModel.LoadDataCommand.ExecuteAsync(false));
+            if (DataContext is ViewModel viewModel)
+            {
+                await Dispatcher.InvokeAsync(() =>
+                {
+                    viewModel.SearchText = string.Empty;
+                    viewModel.LoadDataCommand.ExecuteAsync(false);
+                });
+            }
         }
     }
 }

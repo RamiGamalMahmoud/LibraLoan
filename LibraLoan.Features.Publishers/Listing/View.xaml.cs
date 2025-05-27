@@ -1,4 +1,5 @@
 ﻿using LibraLoan.Core.Abstraction.Features.Publishers;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace LibraLoan.Features.Publishers.Listing
@@ -14,11 +15,15 @@ namespace LibraLoan.Features.Publishers.Listing
             Loaded += View_Loaded;
         }
 
-        private async void View_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        private async void View_Loaded(object sender, RoutedEventArgs e)
         {
             if (DataContext is ViewModel viewModel)
             {
-                await Dispatcher.InvokeAsync(async () => await viewModel.LoadDataCommand.ExecuteAsync(false));
+                await Dispatcher.InvokeAsync(() =>
+                {
+                    viewModel.SearchText = string.Empty;
+                    viewModel.LoadDataCommand.ExecuteAsync(false);
+                });
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace LibraLoan.Features.Management.RolesAndPermissions.Permissions
 {
@@ -11,11 +12,16 @@ namespace LibraLoan.Features.Management.RolesAndPermissions.Permissions
             Loaded += View_Loaded;
         }
 
-        private async void View_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        private async void View_Loaded(object sender, RoutedEventArgs e)
         {
-            ViewModel viewModel = (ViewModel)DataContext;
-            if(viewModel is null) return;
-            await Dispatcher.Invoke(() => viewModel.LoadDataCommand.ExecuteAsync(false));
+            if (DataContext is ViewModel viewModel)
+            {
+                await Dispatcher.InvokeAsync(() =>
+                {
+                    viewModel.SearchText = string.Empty;
+                    viewModel.LoadDataCommand.ExecuteAsync(false);
+                });
+            }
         }
     }
 }

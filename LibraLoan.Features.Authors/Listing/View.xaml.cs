@@ -12,14 +12,18 @@ namespace LibraLoan.Features.Authors.Listing
 
             DataContext = viewModel;
 
-            Loaded += ViewLoaded;
+            Loaded += View_Loaded;
         }
 
-        private async void ViewLoaded(object sender, RoutedEventArgs e)
+        private async void View_Loaded(object sender, RoutedEventArgs e)
         {
             if (DataContext is ViewModel viewModel)
             {
-                await Dispatcher.InvokeAsync(() => viewModel.LoadDataCommand.ExecuteAsync(false));
+                await Dispatcher.InvokeAsync(() =>
+                {
+                    viewModel.SearchText = string.Empty;
+                    viewModel.LoadDataCommand.ExecuteAsync(false);
+                });
             }
         }
     }

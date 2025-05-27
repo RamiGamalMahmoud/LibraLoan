@@ -19,7 +19,11 @@ namespace LibraLoan.Features.Books.Listing
         {
             if (DataContext is ViewModel viewModel)
             {
-                await Dispatcher.InvokeAsync(() => viewModel.LoadDataCommand.ExecuteAsync(false));
+                await Dispatcher.InvokeAsync(() =>
+                {
+                    viewModel.SearchText = string.Empty;
+                    viewModel.LoadDataCommand.ExecuteAsync(false);
+                });
             }
         }
 

@@ -16,7 +16,7 @@ namespace LibraLoan.Features.Authors.Listing
 
         protected override Task SearchAsync()
         {
-            Models = _tempModels.Where(x => x.Name.Contains(SearchText));
+            Models = _tempModels?.Where(x => x.Name.Contains(SearchText));
 
             return Task.CompletedTask;
         }

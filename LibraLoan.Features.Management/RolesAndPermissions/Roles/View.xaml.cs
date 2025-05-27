@@ -12,10 +12,16 @@ namespace LibraLoan.Features.Management.RolesAndPermissions.Roles
             Loaded += View_Loaded;
         }
 
-        private void View_Loaded(object sender, RoutedEventArgs e)
+        private async void View_Loaded(object sender, RoutedEventArgs e)
         {
-            var viewModel = (ViewModel)DataContext;
-            viewModel?.LoadDataCommand.ExecuteAsync(false);
+            if (DataContext is ViewModel viewModel)
+            {
+                await Dispatcher.InvokeAsync(() =>
+                {
+                    viewModel.SearchText = string.Empty;
+                    viewModel.LoadDataCommand.ExecuteAsync(false);
+                });
+            }
         }
     }
 }
