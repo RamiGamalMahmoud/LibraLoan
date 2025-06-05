@@ -117,6 +117,7 @@
                     FontSize="16"
                     FontWeight="Bold"
                     Foreground="{StaticResource WarningBrush}"
+                    IsCancel="True"
                     Style="{StaticResource MaterialDesignOutlinedButton}" />
             </StackPanel>
 

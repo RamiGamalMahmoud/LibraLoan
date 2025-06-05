@@ -51,6 +51,7 @@ namespace LibraLoan.Data.Repositories
                 {
                     await dbContext.SaveChangesAsync();
                     user.CreatedBy = userDto.CreatedBy;
+                    user.Role = userDto.Role;
                     _models.Add(user);
                     return user;
                 }

@@ -16,7 +16,7 @@ namespace LibraLoan.Features.Management.Users.Editor
             UserName = user.Username;
             SelectedRole = user.Role;
             IsActive = user.IsActive;
-            UserCanBeDeactivated = !user.IsAdmin;
+            //UserCanBeDeactivated = !user.IsAdmin;
             _notifyPropertiesNames.Add(nameof(Password));
             HasChanges = false;
         }

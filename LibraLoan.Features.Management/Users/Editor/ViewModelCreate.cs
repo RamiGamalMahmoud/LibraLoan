@@ -29,7 +29,7 @@ namespace LibraLoan.Features.Management.Users.Editor
         protected override async Task Save()
         {
             User currentUser = _messenger.Send(new Core.Messages.GetLoggedInUser());
-            User user = await _mediator.Send(new Core.Commands.Common.CreateCommand<User, UserDto>(new UserDto(0, UserName.Trim(), _passwordHasher.HashPassword(Password), SelectedRole, currentUser, true)));
+            User user = await _mediator.Send(new Core.Commands.Common.CreateCommand<User, UserDto>(new UserDto(0, UserName.Trim(), _passwordHasher.HashPassword(Password), SelectedRole, currentUser, IsActive)));
 
             if (user is null)
             {

@@ -3,7 +3,6 @@ using CommunityToolkit.Mvvm.Messaging;
 using LibraLoan.Core.Abstraction.Services;
 using LibraLoan.Core.Common;
 using LibraLoan.Core.Models;
-using LibraLoan.Resources;
 using MediatR;
 using System;
 using System.Linq;
@@ -21,10 +20,10 @@ namespace LibraLoan.Features.Loans.Listing
         [RelayCommand]
         private async Task ReturnBook(Loan loan)
         {
-            DateWindow dateWindow = new DateWindow($"تاريخ الاستعارة : {loan.LoanDate:yyyy-MM-dd}");
+            DateWindow dateWindow = new DateWindow(loan.Book.Title, loan.LoanDate, loan.ExpectedReturnDate);
             if(dateWindow.ShowDialog() is false) return;
 
-            DateTime? selectedDate = dateWindow.ViewModel.SelectedDate;
+            DateTime? selectedDate = dateWindow.viewModel.SelectedDate;
 
             if(selectedDate < loan.LoanDate)
             {

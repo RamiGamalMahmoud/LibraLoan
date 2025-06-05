@@ -15,5 +15,7 @@ namespace LibraLoan.Core.Messages
         {
             public string Message => message;
         }
+
+        public record CloseEditor<TModel>;
     }
 }

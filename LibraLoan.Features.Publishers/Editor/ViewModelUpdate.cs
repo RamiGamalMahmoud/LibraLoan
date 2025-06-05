@@ -28,7 +28,7 @@ namespace LibraLoan.Features.Publishers.Editor
         {
             bool isConfirmed = _messenger.Send(new Core.Messages.Common.ConfigrRequestMessge());
             if (!isConfirmed) return;
-            PublisherDto publisherDto = new PublisherDto(_publisher.Id, Name.Trim(), Phone.Trim(), Email.Trim(), Website.Trim(), Fax.Trim(),  null);
+            PublisherDto publisherDto = new PublisherDto(_publisher.Id, Name.Trim(), Phone.Trim(), Email?.Trim(), Website?.Trim(), Fax?.Trim(),  null);
             bool isUpdated = await _mediator.Send(new Core.Commands.Common.UpdateCommand<PublisherDto>(publisherDto));
 
             if (isUpdated)

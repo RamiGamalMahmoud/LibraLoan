@@ -70,7 +70,7 @@ namespace LibraLoan.Tests
                 IMediator mediator = s.GetRequiredService<IMediator>();
                 IMessenger messenger = s.GetRequiredService<IMessenger>();
 
-                Publisher publisher = new Publisher() { Name = "publisher", Phone = "123456789", Email = "email" };
+                Publisher publisher = new Publisher() { Name = "publisher", Phone = "123456789", Email = "email@server.com" };
 
                 LibraLoan.Features.Publishers.Editor.ViewModelUpdate viewModel = new LibraLoan.Features.Publishers.Editor.ViewModelUpdate(mediator, messenger, publisher);
 

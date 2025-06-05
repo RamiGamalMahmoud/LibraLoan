@@ -19,7 +19,6 @@ namespace LibraLoan.Features.Management.Users.Editor
             _messenger = messenger;
             _passwordHasher = passwordHasher;
             _notifyPropertiesNames = [nameof(UserName), nameof(IsActive), nameof(SelectedRole)];
-            ValidateAllProperties();
         }
 
         public async Task LoadDataAsync()
@@ -27,12 +26,8 @@ namespace LibraLoan.Features.Management.Users.Editor
             Roles = await _mediator.Send(new Core.Commands.Common.GetAllCommand<Role>(false));
         }
 
+        [ObservableProperty]
         private bool _userCanBeDeactivated = true;
-        public bool UserCanBeDeactivated
-        {
-            get => _userCanBeDeactivated;
-            protected set => SetProperty(ref _userCanBeDeactivated, value);
-        }
 
         [ObservableProperty]
         [Required(ErrorMessage = "يجب ادخال اسم المستخدم")]

@@ -45,6 +45,7 @@ namespace LibraLoan.Features.Loans.Editor
                 if(ActualReturnDate is not null)
                 {
                     _loan.ActualReturnDate = ActualReturnDate;
+                    _loan.IsReturned = true;
                 }
                 _loan.Price = Price;
                 _messenger.Send(new Core.Messages.Common.SuccessMessage("تم التعديل بنجاح"));

@@ -49,12 +49,20 @@ namespace LibraLoan.Features.Publishers.Editor
         private string _phone;
 
         [ObservableProperty]
+        [Phone(ErrorMessage = "يجب ادخال رقم فاكس صحيح")]
+        [NotifyCanExecuteChangedFor(nameof(SaveCommand))]
         private string _fax;
 
         [ObservableProperty]
+        [EmailAddress(ErrorMessage = "يجب ادخال عنوان بريد صحيح")]
+        [NotifyDataErrorInfo]
+        [NotifyCanExecuteChangedFor(nameof(SaveCommand))]
         private string _email;
 
         [ObservableProperty]
+        [Url(ErrorMessage = "يجب ادخال عنوان موقع صحيح")]
+        [NotifyDataErrorInfo]
+        [NotifyCanExecuteChangedFor(nameof(SaveCommand))]
         private string _website;
 
         protected IMediator _mediator;

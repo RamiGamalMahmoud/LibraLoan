@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using LibraLoan.Core.Common;
+using LibraLoan.Core.Models;
 using MediatR;
 using System.ComponentModel.DataAnnotations;
 
@@ -22,5 +24,11 @@ namespace LibraLoan.Features.Authors.Editor
 
         protected IMediator _mediator;
         protected IMessenger _messenger;
+
+        [RelayCommand]
+        private void CloseEditor()
+        {
+            _messenger.Send(new Core.Messages.Common.CloseEditor<Author>());
+        }
     }
 }

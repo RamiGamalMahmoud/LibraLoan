@@ -132,8 +132,13 @@ namespace LibraLoan.Data.Repositories
                 loan.BookId = model.Book.Id;
                 loan.ClientId = model.Client.Id;
 
+                // ActualReturnDate not set
+                // ActualReturnDate has value
+
                 if (model.ActualReturnDate.HasValue)
                 {
+                    Book book = await dbContext.Books.FindAsync(model.Book.Id);
+                    book.LoanedCopies++;
                     loan.Return(model.ActualReturnDate);
                 }
 

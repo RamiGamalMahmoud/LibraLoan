@@ -58,7 +58,7 @@ namespace LibraLoan.Features.Loans.Editor
             }
         }
 
-        public bool IsValidActualReturnDate => ActualReturnDate is null || ActualReturnDate.Value.Date >= LoanDate.Value.Date;
+        public bool IsValidActualReturnDate => ActualReturnDate is null || LoanDate is not null && ActualReturnDate.Value.Date >= LoanDate.Value.Date;
 
         public bool IsValidExpectedReturnDate => ExpectedReturnDate.HasValue && ExpectedReturnDate.Value.Date >= LoanDate.Value.Date;
 
@@ -117,6 +117,7 @@ namespace LibraLoan.Features.Loans.Editor
             SelectedBook = null;
             SelectedClient = null;
             ExpectedReturnDate = null;
+            ActualReturnDate = null;
             LoanDate = null;
         }
 
