@@ -31,9 +31,6 @@ namespace LibraLoan.Features.Authors.Listing
             return Task.CompletedTask;
         }
 
-        [ObservableProperty]
-        private object _editorView;
-
         protected override Task ShowCreate()
         {
             CloseEditor();
@@ -48,11 +45,6 @@ namespace LibraLoan.Features.Authors.Listing
             Editor.ViewModel viewModel = new Editor.ViewModelUpdate(_mediator, _messenger, model);
             EditorView = new Editor.View(viewModel);
             return Task.CompletedTask;
-        }
-
-        private void CloseEditor()
-        {
-            EditorView = null;
         }
 
         protected override bool CanCreate()

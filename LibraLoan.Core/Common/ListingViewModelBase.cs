@@ -21,7 +21,17 @@ namespace LibraLoan.Core.Common
 
         [ObservableProperty]
         protected IEnumerable<TModel> _models;
+
         protected IEnumerable<TModel> _tempModels;
+
+        [ObservableProperty]
+        private object _editorView;
+
+        [RelayCommand]
+        protected void CloseEditor()
+        {
+            EditorView = null;
+        }
 
         [RelayCommand]
         protected virtual async Task LoadDataAsync(bool reload)
