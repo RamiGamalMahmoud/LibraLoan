@@ -20,6 +20,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="1*" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
         <StackPanel
@@ -144,5 +145,17 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <Border
+            Grid.Row="2"
+            Margin="0,10,0,0"
+            Padding="10"
+            Background="White"
+            CornerRadius="5"
+            Visibility="{Binding EditorView, Converter={x:Static mdc:NullableToVisibilityConverter.CollapsedInstance}}">
+            <ContentControl
+                Margin="10,10,0,0"
+                VerticalAlignment="Top"
+                Content="{Binding EditorView}" />
+        </Border>
     </Grid>
 </UserControl>

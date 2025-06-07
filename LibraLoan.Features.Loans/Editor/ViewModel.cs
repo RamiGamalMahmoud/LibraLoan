@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace LibraLoan.Features.Loans.Editor
 {
-    internal abstract partial class ViewModel : EditorViewModelBase
+    internal abstract partial class ViewModel : EditorViewModelBase<Loan>
     {
         protected ViewModel(IMediator mediator, IMessenger messenger) : base()
         {

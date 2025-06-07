@@ -4,6 +4,7 @@ using LibraLoan.Core.Abstraction.Services;
 using LibraLoan.Core.Common;
 using LibraLoan.Core.Models;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,8 +14,9 @@ namespace LibraLoan.Features.Loans.Listing
 {
     internal partial class ViewModel : ListingViewModelBase<Loan>
     {
-        public ViewModel(IMediator mediator, IMessenger messenger, IAppStateService appStateService) : base(mediator, messenger, appStateService)
+        public ViewModel(IMediator mediator, IMessenger messenger, IAppStateService appStateService, System.IServiceProvider serviceProvider) : base(mediator, messenger, appStateService)
         {
+            _serviceProvider = serviceProvider;
         }
 
         [RelayCommand]
@@ -23,7 +25,7 @@ namespace LibraLoan.Features.Loans.Listing
             DateWindow dateWindow = new DateWindow(loan.Book.Title, loan.LoanDate, loan.ExpectedReturnDate);
             if(dateWindow.ShowDialog() is false) return;
 
-            DateTime? selectedDate = dateWindow.viewModel.SelectedDate;
+            DateTime selectedDate = dateWindow.viewModel.SelectedDate;
 
             if(selectedDate < loan.LoanDate)
             {
@@ -69,6 +71,22 @@ namespace LibraLoan.Features.Loans.Listing
             return Task.CompletedTask;
         }
 
+        protected override Task ShowCreate()
+        {
+            CloseEditor();
+            Editor.ViewModelCreate viewModel = _serviceProvider.GetRequiredService<Editor.ViewModelCreate>();
+            EditorView = new Editor.View(viewModel);
+            return Task.CompletedTask;
+        }
+
+        protected override Task ShowUpdate(Loan model)
+        {
+            CloseEditor();
+            Editor.ViewModel viewModel = new Editor.ViewModelUpdate(_mediator, _messenger, model);
+            EditorView = new Editor.View(viewModel);
+            return Task.CompletedTask;
+        }
+
         protected override bool CanCreate()
         {
             return _appStateService.CurrentUser.HasPermission(Resource.LoansResource, ActionModel.CreateAction) && base.CanCreate();
@@ -83,5 +101,6 @@ namespace LibraLoan.Features.Loans.Listing
         {
             return base.CanUpdate(model) && _appStateService.CurrentUser.HasPermission(Resource.LoansResource, ActionModel.UpdateAction);
         }
+        private readonly System.IServiceProvider _serviceProvider;
     }
 }

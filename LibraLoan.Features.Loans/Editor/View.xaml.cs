@@ -1,8 +1,9 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace LibraLoan.Features.Loans.Editor
 {
-    internal partial class View : Window
+    internal partial class View : UserControl
     {
         public View(ViewModel viewModel)
         {
@@ -18,7 +19,5 @@ namespace LibraLoan.Features.Loans.Editor
                 await Dispatcher.Invoke(() => viewModel.LoadAsync());
             }
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e) => Close();
     }
 }

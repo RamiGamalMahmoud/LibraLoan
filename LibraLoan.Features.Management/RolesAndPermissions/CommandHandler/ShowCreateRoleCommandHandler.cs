@@ -12,7 +12,6 @@ namespace LibraLoan.Features.Management.RolesAndPermissions.CommandHandler
         public Task Handle(Common.ShowCreateCommand<Role> request, CancellationToken cancellationToken)
         {
             Roles.Editor.View view = new Roles.Editor.View(viewModel);
-            view.ShowDialog();
             return Task.CompletedTask;
         }
     }

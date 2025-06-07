@@ -1,4 +1,4 @@
-﻿<Window
+﻿<UserControl
     x:Class="LibraLoan.Features.Management.RolesAndPermissions.Permissions.Editor.View"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -7,15 +7,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mdc="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
-    Title="{Binding Title}"
     d:DataContext="{d:DesignInstance Type=local:ViewModel}"
     x:ClassModifier="internal"
     FontFamily="{StaticResource FontFamily}"
     FontSize="16"
     FontWeight="Bold"
-    ResizeMode="NoResize"
-    SizeToContent="WidthAndHeight"
-    WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
 
     <Border Padding="20" FlowDirection="RightToLeft">
@@ -36,14 +32,15 @@
                         Foreground="{StaticResource MaterialDesign.Brush.Primary}"
                         Text="نوع الصلاحية" />
                     <ComboBox
-                        Width="150"
+                        Width="200"
                         Margin="5"
                         Padding="10"
                         md:TextFieldAssist.HasClearButton="True"
                         Cursor="Hand"
                         DisplayMemberPath="Name"
                         ItemsSource="{Binding Resources}"
-                        SelectedItem="{Binding SelectedResource, UpdateSourceTrigger=PropertyChanged}" />
+                        SelectedItem="{Binding SelectedResource, UpdateSourceTrigger=PropertyChanged}"
+                        Style="{StaticResource MaterialDesignOutlinedComboBox}" />
                 </StackPanel>
 
                 <StackPanel Margin="0,20,0,0" Orientation="Horizontal">
@@ -53,28 +50,27 @@
                         Foreground="{StaticResource MaterialDesign.Brush.Primary}"
                         Text="نوع الإجراء" />
                     <ComboBox
-                        Width="150"
+                        Width="200"
                         Margin="5"
                         Padding="10"
                         md:TextFieldAssist.HasClearButton="True"
                         Cursor="Hand"
                         DisplayMemberPath="Name"
                         ItemsSource="{Binding Actions}"
-                        SelectedItem="{Binding SelectedAction}" />
+                        SelectedItem="{Binding SelectedAction}"
+                        Style="{StaticResource MaterialDesignOutlinedComboBox}" />
                 </StackPanel>
 
             </StackPanel>
 
-            <Grid Grid.Row="1" Margin="0,30,0,0">
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                </Grid.ColumnDefinitions>
+            <StackPanel
+                Grid.Row="1"
+                Margin="0,30,0,0"
+                HorizontalAlignment="Center"
+                Orientation="Horizontal">
 
                 <Button
-                    Grid.Column="0"
-                    Width="60"
+                    Margin="5,0"
                     BorderThickness="0"
                     Command="{Binding SaveCommand}"
                     Content="حفظ"
@@ -84,21 +80,20 @@
                     IsDefault="True" />
 
                 <Button
-                    Grid.Column="1"
-                    Width="60"
+                    Margin="5,0"
                     Background="{StaticResource DangerBrush}"
                     BorderThickness="0"
-                    Click="Button_Click"
+                    Command="{Binding CloseEditorCommand}"
                     Content="إلغاء"
                     Cursor="Hand"
                     FontFamily="Arial"
                     FontSize="20"
                     IsCancel="True" />
 
-            </Grid>
+            </StackPanel>
 
         </Grid>
 
     </Border>
 
-</Window>
+</UserControl>

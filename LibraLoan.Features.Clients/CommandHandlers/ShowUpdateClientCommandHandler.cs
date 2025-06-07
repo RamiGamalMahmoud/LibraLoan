@@ -14,7 +14,7 @@ namespace LibraLoan.Features.Clients.CommandHandlers
         {
             ViewModelUpdate viewModel = new ViewModelUpdate(mediator, messenger, request.Model);
             View view = new View(viewModel);
-            view.ShowDialog();
+            //view.ShowDialog();
             return Task.CompletedTask;
         }
     }

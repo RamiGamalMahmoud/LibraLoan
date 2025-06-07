@@ -13,7 +13,6 @@ namespace LibraLoan.Features.Management.Users.CommandHandlers
         public Task Handle(ShowUpdateCommand<User> request, CancellationToken cancellationToken)
         {
             Editor.View view = new Editor.View(new Editor.ViewModelUpdate(mediator, messenger, passwordHasher, request.Model));
-            view.ShowDialog();
             return Task.CompletedTask;
         }
     }
