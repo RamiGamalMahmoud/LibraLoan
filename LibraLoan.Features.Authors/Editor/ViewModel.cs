@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LibraLoan.Features.Authors.Editor
 {
-    internal abstract partial class ViewModel : EditorViewModelBase
+    internal abstract partial class ViewModel : EditorViewModelBase<Author>
     {
         protected ViewModel(IMediator mediator, IMessenger messenger): base()
         {
@@ -24,11 +24,5 @@ namespace LibraLoan.Features.Authors.Editor
 
         protected IMediator _mediator;
         protected IMessenger _messenger;
-
-        [RelayCommand]
-        private void CloseEditor()
-        {
-            _messenger.Send(new Core.Messages.Common.CloseEditor<Author>());
-        }
     }
 }

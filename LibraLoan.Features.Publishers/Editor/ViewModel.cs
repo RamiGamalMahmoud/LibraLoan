@@ -2,13 +2,14 @@
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using LibraLoan.Core.Common;
+using LibraLoan.Core.Models;
 using MediatR;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
 namespace LibraLoan.Features.Publishers.Editor
 {
-    internal abstract partial class ViewModel : EditorViewModelBase
+    internal abstract partial class ViewModel : EditorViewModelBase<Publisher>
     {
         protected ViewModel(IMediator mediator, IMessenger messenger) : base()
         {

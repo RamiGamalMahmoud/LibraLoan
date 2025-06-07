@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace LibraLoan.Features.Management.RolesAndPermissions.Permissions.Editor
 {
-    internal abstract partial class ViewModel : EditorViewModelBase
+    internal abstract partial class ViewModel : EditorViewModelBase<Permission>
     {
         public ViewModel(IMediator mediator, IMessenger messenger)
         {

@@ -1,11 +1,9 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Messaging;
+﻿using CommunityToolkit.Mvvm.Messaging;
 using LibraLoan.Core.Abstraction.Services;
 using LibraLoan.Core.Common;
 using LibraLoan.Core.Models;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-//using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,10 +16,6 @@ namespace LibraLoan.Features.Authors.Listing
         public ViewModel(IMediator mediator, IMessenger messenger, IAppStateService appStateService, System.IServiceProvider serviceProvider) : base(mediator, messenger, appStateService)
         {
             _serviceProvider = serviceProvider;
-            _messenger.Register<Core.Messages.Common.CloseEditor<Author>>(this, (r, m) =>
-            {
-                EditorView = null;
-            });
         }
 
         protected override Task SearchAsync()

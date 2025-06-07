@@ -21,7 +21,11 @@ namespace LibraLoan.Features.Loans.Editor
 
         protected override async Task Save()
         {
-            LoanDto loanDto = new LoanDto(0, SelectedBook, SelectedClient, (DateTime)LoanDate, (DateTime)ExpectedReturnDate, ActualReturnDate, _appStateService.CurrentUser);
+            DateTime loanDate = (DateTime)LoanDate;
+            DateTime expectedReturnDate = (DateTime)ExpectedReturnDate;
+            DateTime? actualReturnDate = ActualReturnDate;
+
+            LoanDto loanDto = new LoanDto(0, SelectedBook, SelectedClient, loanDate.Date, expectedReturnDate, actualReturnDate, _appStateService.CurrentUser);
             Loan loan = await _mediator.Send(new CreateCommand<Loan, LoanDto>(loanDto));
             if (loan is null)
             {

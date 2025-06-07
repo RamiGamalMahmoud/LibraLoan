@@ -13,7 +13,6 @@ namespace LibraLoan.Features.Publishers.CommandHandlers
         {
             Editor.ViewModel viewModel = new Editor.ViewModelUpdate(mediator, messenger, request.Model);
             Editor.View view = new Editor.View(viewModel);
-            view.ShowDialog();
             return Task.CompletedTask;
         }
     }

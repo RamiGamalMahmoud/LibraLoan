@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace LibraLoan.Features.Management.Users.Editor
 {
-    internal abstract partial class ViewModel : EditorViewModelBase
+    internal abstract partial class ViewModel : EditorViewModelBase<User>
     {
         public ViewModel(IMediator mediator, IMessenger messenger, IPasswordHasher passwordHasher)
         {

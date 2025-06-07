@@ -1,4 +1,4 @@
-﻿<Window
+﻿<UserControl
     x:Class="LibraLoan.Features.Management.RolesAndPermissions.Roles.Editor.View"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -12,11 +12,9 @@
     FontFamily="{StaticResource FontFamily}"
     FontSize="16"
     FontWeight="Bold"
-    SizeToContent="WidthAndHeight"
-    WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
 
-    <Border Padding="50,20" FlowDirection="RightToLeft">
+    <Border Padding="10" FlowDirection="RightToLeft">
 
         <Grid>
 
@@ -114,7 +112,7 @@
                                                                     CornerRadius="2">
                                                                     <CheckBox
                                                                         Checked="CheckBox_Checked"
-                                                                        Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DataContext.UpdateSelectionCommand}"
+                                                                        Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.UpdateSelectionCommand}"
                                                                         CommandParameter="{Binding}"
                                                                         Content="{Binding Value.Action.Name}"
                                                                         Cursor="Hand"
@@ -171,7 +169,7 @@
                 <Button
                     Background="{StaticResource DangerBrush}"
                     BorderThickness="0"
-                    Click="Button_Click"
+                    Command="{Binding CloseEditorCommand}"
                     Content="إلغاء"
                     Cursor="Hand"
                     FontFamily="Arial"
@@ -184,4 +182,4 @@
 
     </Border>
 
-</Window>
+</UserControl>

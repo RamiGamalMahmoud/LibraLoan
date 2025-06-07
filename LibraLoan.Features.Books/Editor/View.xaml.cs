@@ -1,8 +1,9 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace LibraLoan.Features.Books.Editor
 {
-    internal partial class View : Window
+    internal partial class View : UserControl
     {
         public View(ViewModel viewModel)
         {

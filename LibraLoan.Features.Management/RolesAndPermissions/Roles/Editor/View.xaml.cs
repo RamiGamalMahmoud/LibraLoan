@@ -3,7 +3,7 @@ using System.Windows.Controls;
 
 namespace LibraLoan.Features.Management.RolesAndPermissions.Roles.Editor
 {
-    internal partial class View : Window
+    internal partial class View : UserControl
     {
         public View(ViewModel viewModel)
         {
@@ -14,9 +14,7 @@ namespace LibraLoan.Features.Management.RolesAndPermissions.Roles.Editor
 
         private async void View_Loaded(object sender, RoutedEventArgs e)
         {
-            ViewModel viewModel = DataContext as ViewModel;
-
-            if (viewModel is null) return;
+            if (DataContext is not ViewModel viewModel) return;
             await Dispatcher.InvokeAsync(() => viewModel.LoadCommand.ExecuteAsync(false));
         }
 
@@ -26,8 +24,6 @@ namespace LibraLoan.Features.Management.RolesAndPermissions.Roles.Editor
             if (viewModel is null) return;
 
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e) => Close();
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {

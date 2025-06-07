@@ -1,8 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
+using LibraLoan.Core.Abstraction;
 using LibraLoan.Core.Abstraction.Services;
 using LibraLoan.Core.Common;
 using LibraLoan.Core.Models;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,8 +14,9 @@ namespace LibraLoan.Features.Management.Users.Listing
 {
     internal partial class ViewModel : ListingViewModelBase<User>
     {
-        public ViewModel(IMediator mediator, IMessenger messenger, IAppStateService appStateService) : base(mediator, messenger, appStateService)
+        public ViewModel(IMediator mediator, IMessenger messenger, IAppStateService appStateService, System.IServiceProvider serviceProvider) : base(mediator, messenger, appStateService)
         {
+            _serviceProvider = serviceProvider;
             _deleteMessage = "هل انت متاكد من حذف هذا المستخدم؟";
         }
 
@@ -37,6 +40,22 @@ namespace LibraLoan.Features.Management.Users.Listing
 
             return Task.CompletedTask;
         }
+        protected override Task ShowCreate()
+        {
+            CloseEditor();
+            Editor.ViewModelCreate viewModel = _serviceProvider.GetRequiredService<Editor.ViewModelCreate>();
+            EditorView = new Editor.View(viewModel);
+            return Task.CompletedTask;
+        }
+
+        protected override Task ShowUpdate(User model)
+        {
+            CloseEditor();
+            IPasswordHasher passwordHasher = _serviceProvider.GetRequiredService<IPasswordHasher>();
+            Editor.ViewModel viewModel = new Editor.ViewModelUpdate(_mediator, _messenger, passwordHasher, model);
+            EditorView = new Editor.View(viewModel);
+            return Task.CompletedTask;
+        }
 
         protected override bool CanCreate()
         {
@@ -54,5 +73,6 @@ namespace LibraLoan.Features.Management.Users.Listing
         }
 
         private IEnumerable<User> _users;
+        private readonly System.IServiceProvider _serviceProvider;
     }
 }

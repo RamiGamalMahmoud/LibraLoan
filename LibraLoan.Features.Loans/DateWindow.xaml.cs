@@ -19,6 +19,8 @@ namespace LibraLoan.Features.Loans.Listing
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            DateTime selectedDate = viewModel.SelectedDate;
+            viewModel.SelectedDate = new DateTime(selectedDate.Year, selectedDate.Month, selectedDate.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
             DialogResult = true;
         }
 
@@ -39,7 +41,7 @@ namespace LibraLoan.Features.Loans.Listing
         [ObservableProperty]
         [Required]
         [NotifyDataErrorInfo]
-        private DateTime? _selectedDate = DateTime.Today;
+        private DateTime _selectedDate = DateTime.Now;
 
         public DateWindowViewModel(string bookTitle, DateTime loanDate, DateTime expectedReturnDate)
         {

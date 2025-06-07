@@ -1,12 +1,14 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
+using LibraLoan.Core.Models;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
 
 namespace LibraLoan.Core.Common
 {
-    public abstract partial class EditorViewModelBase : ObservableValidator
+    public abstract partial class EditorViewModelBase<TModel> : ObservableValidator
     {
         protected EditorViewModelBase()
         {
@@ -24,6 +26,12 @@ namespace LibraLoan.Core.Common
             {
                 HasChanges = true;
             }
+        }
+
+        [RelayCommand]
+        private void CloseEditor()
+        {
+            WeakReferenceMessenger.Default.Send(new Core.Messages.Common.CloseEditor<TModel>());
         }
 
         [RelayCommand(CanExecute = nameof(CanSave))]

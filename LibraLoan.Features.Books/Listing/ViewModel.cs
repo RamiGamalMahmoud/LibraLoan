@@ -3,6 +3,7 @@ using LibraLoan.Core.Abstraction.Services;
 using LibraLoan.Core.Common;
 using LibraLoan.Core.Models;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,7 +11,7 @@ namespace LibraLoan.Features.Books.Listing
 {
     internal class ViewModel : ListingViewModelBase<Book>
     {
-        public ViewModel(IMediator mediator, IMessenger messenger, IAppStateService appStateService) : base(mediator, messenger, appStateService)
+        public ViewModel(IMediator mediator, IMessenger messenger, IAppStateService appStateService, System.IServiceProvider serviceProvider) : base(mediator, messenger, appStateService)
         {
             _messenger.Register<Core.Messages.Books.BookReturnedMessage>(this, async (r, m) =>
             {
@@ -21,6 +22,8 @@ namespace LibraLoan.Features.Books.Listing
             {
                 await LoadDataAsync(true);
             });
+
+            _serviceProvider = serviceProvider;
         }
 
         protected override Task SearchAsync()
@@ -43,6 +46,22 @@ namespace LibraLoan.Features.Books.Listing
             return Task.CompletedTask;
         }
 
+        protected override Task ShowCreate()
+        {
+            CloseEditor();
+            Editor.ViewModelCreate viewModel = _serviceProvider.GetRequiredService<Editor.ViewModelCreate>();
+            EditorView = new Editor.View(viewModel);
+            return Task.CompletedTask;
+        }
+
+        protected override Task ShowUpdate(Book model)
+        {
+            CloseEditor();
+            Editor.ViewModel viewModel = new Editor.ViewModelUpdate(_mediator, _messenger, model);
+            EditorView = new Editor.View(viewModel);
+            return Task.CompletedTask;
+        }
+
         protected override bool CanCreate()
         {
             return _appStateService.CurrentUser.HasPermission(Resource.BooksResource, Action.CreateAction) && base.CanCreate();
@@ -57,5 +76,7 @@ namespace LibraLoan.Features.Books.Listing
         {
             return base.CanUpdate(model) && _appStateService.CurrentUser.HasPermission(Resource.BooksResource, Action.UpdateAction);
         }
+
+        private readonly System.IServiceProvider _serviceProvider;
     }
 }

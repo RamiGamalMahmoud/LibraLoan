@@ -15,7 +15,7 @@ using static LibraLoan.Core.Commands.Common;
 
 namespace LibraLoan.Features.Books.Editor
 {
-    internal abstract partial class ViewModel : EditorViewModelBase
+    internal abstract partial class ViewModel : EditorViewModelBase<Book>
     {
         protected ViewModel(IMediator mediator, IMessenger messenger) : base()
         {

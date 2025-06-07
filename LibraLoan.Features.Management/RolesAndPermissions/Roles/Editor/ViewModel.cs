@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace LibraLoan.Features.Management.RolesAndPermissions.Roles.Editor
 {
-    internal abstract partial class ViewModel : EditorViewModelBase
+    internal abstract partial class ViewModel : EditorViewModelBase<Role>
     {
         public ViewModel(IMediator mediator, IMessenger messenger)
         {

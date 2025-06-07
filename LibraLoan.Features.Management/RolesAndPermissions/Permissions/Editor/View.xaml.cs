@@ -1,10 +1,9 @@
-﻿using System;
-using System.ComponentModel;
-using System.Windows;
+﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace LibraLoan.Features.Management.RolesAndPermissions.Permissions.Editor
 {
-    internal partial class View : Window
+    internal partial class View : UserControl
     {
         public View(ViewModel viewModel)
         {
@@ -22,7 +21,5 @@ namespace LibraLoan.Features.Management.RolesAndPermissions.Permissions.Editor
                 await Dispatcher.InvokeAsync(() => viewModel.LoadAsync());
             }
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e) => Close();
     }
 }

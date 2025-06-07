@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using LibraLoan.Core.Abstraction.Services;
+using LibraLoan.Core.Models;
 using MediatR;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -15,6 +16,11 @@ namespace LibraLoan.Core.Common
             _mediator = mediator;
             _messenger = messenger;
             _appStateService = appStateService;
+
+            _messenger.Register<Core.Messages.Common.CloseEditor<TModel>>(this, (r, m) =>
+            {
+                CloseEditor();
+            });
         }
 
         protected string _deleteMessage = "هل تريد الحذف؟";

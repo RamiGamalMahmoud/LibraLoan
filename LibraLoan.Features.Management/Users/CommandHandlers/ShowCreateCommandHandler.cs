@@ -12,7 +12,6 @@ namespace LibraLoan.Features.Management.Users.CommandHandlers
         public Task Handle(Common.ShowCreateCommand<User> request, CancellationToken cancellationToken)
         {
             View view = new View(viewModel);
-            view.ShowDialog();
             return Task.CompletedTask;
         }
     }

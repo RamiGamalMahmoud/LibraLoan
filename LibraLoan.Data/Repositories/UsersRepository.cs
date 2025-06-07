@@ -1,5 +1,4 @@
-﻿using LibraLoan.Core.Abstraction;
-using LibraLoan.Core.Abstraction.Repositories;
+﻿using LibraLoan.Core.Abstraction.Repositories;
 using LibraLoan.Core.DTOs;
 using LibraLoan.Core.Models;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace LibraLoan.Data.Repositories
 {
-    internal class UsersRepository(IAppDbContextFactory dbContextFactory, IPasswordHasher passwordHasher) : RepositoryBase<User>(dbContextFactory), IUsersRepository
+    internal class UsersRepository(IAppDbContextFactory dbContextFactory) : RepositoryBase<User>(dbContextFactory), IUsersRepository
     {
         public override async Task<IEnumerable<User>> GetAllAsync(bool reload)
         {
@@ -45,7 +44,7 @@ namespace LibraLoan.Data.Repositories
             using (AppDbContext dbContext = _dbContextFactory.CreateDbContext())
             {
                 EntityEntry<User> entry = dbContext.Users.Add(user);
-                entry.Property<string>("Password").CurrentValue = passwordHasher.HashPassword(userDto.Password);
+                entry.Property<string>("Password").CurrentValue = userDto.Password;
 
                 try
                 {

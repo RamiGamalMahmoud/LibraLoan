@@ -8,6 +8,7 @@ using LibraLoan.Core.Models;
 using LibraLoan.Data;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace LibraLoan.Features.Auth.Login
@@ -53,6 +54,7 @@ namespace LibraLoan.Features.Auth.Login
                     .Include(user => user.Role)
                         .ThenInclude(role => role.Permissions)
                         .ThenInclude(permission => permission.Action)
+                    .Where(user => user.IsActive)
                     .FirstOrDefaultAsync(x => x.Username == UserName);
                 if(user is null)
                 {

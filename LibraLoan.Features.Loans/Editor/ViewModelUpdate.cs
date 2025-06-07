@@ -32,7 +32,11 @@ namespace LibraLoan.Features.Loans.Editor
             bool isConfirmed = _messenger.Send(new Core.Messages.Common.ConfigrRequestMessge("هل تريد حفظ التعديلات ؟"));
             if (!isConfirmed) return;
 
-            LoanDto loanDto = new LoanDto(_loan.Id, SelectedBook, SelectedClient, (DateTime)LoanDate , (DateTime)ExpectedReturnDate, ActualReturnDate, null);
+            DateTime loanDate = (DateTime)LoanDate;
+            DateTime expectedReturnDate = (DateTime)ExpectedReturnDate;
+            DateTime? actualReturnDate = ActualReturnDate;
+
+            LoanDto loanDto = new LoanDto(_loan.Id, SelectedBook, SelectedClient, loanDate , expectedReturnDate, actualReturnDate, null);
 
 
             bool isUpdated = await _mediator.Send(new UpdateCommand<LoanDto>(loanDto));
